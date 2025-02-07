@@ -14,7 +14,7 @@ package chapter05;
  * class 클래스이름 { }
  */
 // 우리가 문자열을 사용할때 String class 를 이용할 것입니다.
-public class Student {
+public class Student2 {
 	int studentId;			// 학번
 	String studentName;		// 이름
 	int grade;				// 학년
@@ -31,15 +31,4 @@ public class Student {
 		return studentName;
 	}
 	
-	public static void main(String[] args) {
-		// class를 사용할때는 생성을 해주어야 합니다.
-		// 클래스이름 변수명 = new 클래스이름(); 를 사용합니다.
-		Student studentAhn = new Student();
-		studentAhn.studentName = "안연수";
-		
-		System.out.println(studentAhn.studentName);
-		System.out.println(studentAhn.getStudentName());
-		// 생성된 클래스를 사용할때(변수 또는 함수)
-		// 클래스변수명. 과 같이 '.'을 이용해서 접근하시면 됩니다.
-	}
 }
