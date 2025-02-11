@@ -16,6 +16,7 @@ public class Customer {
 	public Customer() {
 		customerGrade = "SILVER";
 		bonusRatio = 0.01;
+		System.out.println("Customer() 생성자");
 	}
 	
 	// 제품가격으로 보너스 포인트를 적립하는 메서드

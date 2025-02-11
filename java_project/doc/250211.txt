@@ -177,3 +177,33 @@ ArrayList<자료형> 변수명 = new ArrayList<변수명>();
 * 저장된 데이터 개수를 알때 : size();
 ==> JDK 기본으로 제공하는 클래스에 상세정보를 알고 싶으면
 Java Document 문서를 살펴보면 됩니다.
+
+
+// getter, setter
+* getter : 값을 읽어오는 것
+* setter : 값을 저장(세팅)하는 것
+public class Student {
+	private int studentId;
+	private String studentName;
+	// getter
+	public int getStudentId() {
+		특정 경우만 값을 가져올때 
+		이곳에 조건을 구현합니다.
+		return studentId;
+	}
+	// setter
+	public void setStudentId(int studentId) {
+		// 파라매터에 적힌 값은 멤버변수 저장합니다.
+		this.studentId = studentId;
+	}
+}
+
+public class StudentTest {
+	public static void main(String[] args) {
+		Student student1 = new Student();
+		// private, protected
+		student1.studentId; 클래스변수이름. 으로 사용할 수 없습니다.
+		sutdent안에 private으로 선언한 변수의 값을 가져오거나
+		저장할 수 있도록 만든 함수가 getter, setter입니다.
+	}
+}
