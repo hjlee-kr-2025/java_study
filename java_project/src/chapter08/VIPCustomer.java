@@ -16,6 +16,20 @@ public class VIPCustomer extends Customer{
 		System.out.println("VIPCustomer() 생성자");
 	}
 	
+	// 매개변수가 있는 생성자
+	public VIPCustomer(int customerId,
+			String customerName, int agentId) {
+		//this.customerId = customerId;
+		//this.customerName = customerName;
+		// 매개변수가 있는 부모생성자 호출
+		super(customerId, customerName);
+		customerGrade = "VIP";
+		bonusRatio = 0.05;
+		saleRatio = 0.1;
+		this.agentId = agentId;
+		System.out.println("VIPCustomer(int, String, int) 생성자");
+	}
+	
 	public int getAgentId() {
 		return agentId;
 	}

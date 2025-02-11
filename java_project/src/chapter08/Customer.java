@@ -19,6 +19,15 @@ public class Customer {
 		System.out.println("Customer() 생성자");
 	}
 	
+	// 매개변수가 있는 생성자
+	public Customer(int customerId, String customerName) {
+		this.customerId = customerId;
+		this.customerName = customerName;
+		customerGrade = "SILVER";
+		bonusRatio = 0.01;
+		System.out.println("Customer(int, String) 생성자");
+	}
+	
 	// 제품가격으로 보너스 포인트를 적립하는 메서드
 	public int calcPrice(int price) {
 		bonusPoint += (price * bonusRatio);
