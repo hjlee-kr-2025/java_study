@@ -1,0 +1,179 @@
+개발을 위한 설치 및 환경설정
+1. 자바 SDK 다운로드
+https://www.oracle.com/kr/java/technologies/downloads/
+위 경로로 진행이 안될때
+https://www.oracle.com/kr
+제품 탭 -> java -> java download
+
+JDK17 version : install 버전으로 다운로드
+(oracle 로그인 필요)
+
+JDK 설치는 기본설치(next만 누르면됩니다)
+
+Windows 기본 환경설정
+내컴퓨터->오른쪽마우스 클릭->속성->고급시스템설정
+->환경변수->시스템변수에서 새로만들기
+->변수이름: JAVA_PATH
+변수값: JDK설치경로
+C:\Program Files\Java\jdk-17
+->시스템변수 path를 찾으시고 클릭
+새로만들기
+%JAVA_PATH%\bin
+위 내용을 제일 위로 이동시킵니다.
+
+2. 이클립스
+https://www.eclipse.org/downloads/
+위 경로로 안들어가면
+https://www.eclipse.org
+=> download 클릭
+
+-> Download Packages 를 클릭
+-> Eclipse IDE for Enterprise
+Java and Web Developers 를 다운받습니다.
+-> 압축을 풀면 eclipse 폴더가 나오고
+C:\ 로 이동시킵니다.
+
+이클립스 설정 (JDK17기준)
+c:\eclipse\eclipse.ini 를 편집합니다.
+1. -vm 설정값 변경
+-vm
+C:/Program Files/Java/jdk-17/bin/javaw.exe
+2. -Dosgi.requiredJavaVersion 변경
+-Dosgi.requiredJavaVersion=17
+3. 추가 (한글사용을 위해서)
+-Dfile.encoding=utf-8
+
+=====================================
+
+
+
+자바
+- 클래스(객체)
+public class 클래스이름 {
+	멤버변수
+
+	클래스이름() {} // 생성자
+	
+	메서드
+	
+	// 자바프로그램이 처음 시작되는 메서드
+	public static void main(String[] args) {
+	}
+}
+
+변수(자료형) - 기본자료형은 4종류 8가지
+1. 정수형 - byte, short, int, long
+2. 문자형 - char
+3. 실수형 - float, double
+4. 논리형 - boolean
+
+상수(변경할수 없는값)를 만들때는 변수선언문 앞에 final을 붙입니다.
+예) final int MAX_NUM = 1000;
+
+형변환
+- 작은공간의 자료형이 큰공간 자료형으로 이동시는 자동 캐스팅
+- 반대의 경우 자료형을 명시해서 강제 캐스팅할 수 있다.
+
+연산자
+* 산술연산자 - 계산시 사용하는 연산자 : +, -, *, /, %
+* 비교연산자 : >, >=, <, <=, ==, != 
+* 논리연산자 : &&(AND), ||(OR), !(NOT)
+* 대입연산자 : =
+* 증/감연산자 : ++, --
+
+조건문
+* 삼항연산자(조건연산잔)
+(조건) ? (참) : (거짓);
+* if, if~else, if~elseif~else
+if (조건) {
+	조건이 참일때
+}
+else {
+	조건이 거짓일때
+}
+-------------
+if (조건1) {
+	조건1이 참일때
+}
+elseif (조건2) {
+	조건1(거짓), 조건2(참)
+}
+else {
+	조건1과 조건2 모두 거짓
+} 
+-------------
+switch (변수) {
+case 값1:
+	변수 == 값1 일때
+	break; // switch 블럭 빠져나감
+case 값2:
+	변수 == 값2 일때
+	break; // switch 블럭 빠져나감
+default: -> 이것은 생략이 가능합니다.
+	변수값이 case 에 적혀있는 값이 아닐때
+	이곳이 실행됩니다.
+}
+
+반복문 - while, do~while, for
+while (조건) {
+	조건이 참인동안 실행이 됩니다.(반복)
+}
+-----------
+do {
+	한번 실행 후 조건이 참인동안 반복실행
+} while(조건) ;
+-----------
+* 일반 for 문
+for (1. 초기 ; 2. 조건 ; 4. 증감) {
+	3. 실행
+}
+* 향상된 for 문 - 배열과 함께 사용
+for (배열자료형 변수명 : 배열변수명) {
+	실행문(실행문에 사용되는 것은 변수명입니다.)
+	 - 배열변수명이 사용되지 않는다. 
+}
+예)
+int[] numArray = {1,2,3,4,5};
+for (int num : numArray) {
+	System.out.println(num);
+}
+
+
+break; 명령은
+ 처음만나는 for, while, switch 블럭을 빠져나가는 명령문입니다.
+ 
+* 클래스
+- 클래스이름은 첫글자를 대문자로 사용합니다.
+- 클래스는 패키지 안에 위치를 합니다.
+ (클래스 이름이 같더라도 패키지가 다르면 다른 클래스입니다.)
+- 패키지 : 폴더, 계층적구조
+클래스를 사용할때는 생성을 합니다.
+- 생성을 할 때 사용되는 함수 - 생성자 - 클래스이름과 같은 함수입니다.
+- 클래스를 만들때 생성자가 있어야 하는데, 개발자가 구현하지 않으면
+	자바컴파일러가 기본생성자를 만들어줍니다.
+	
+접근제어자
+- public, private
+- public : 어느 클래스든 접근이 가능 - 대부분의 메서드는 public으로 구현
+- private : 자신의 클래스 에서만 접근(사용) 가능 - 변수에서 많이 사용
+
+static
+- 한번만 만들어진다
+- 생성자로 생성하지 않고 사용한다.
+
+* 배열 - 자료를 순차적으로 관리하는 구조 - 인덱스와 함께 사용
+* 배열선언
+	자료형[] 배열이름 = new 자료형[개수];
+	자료형 배열이름[] = new 자료형[개수];
+* 초기값을 가진 배열선언
+	자료형[] 배열이름 = {값1, 값2, 값3, ...};
+	
+배열을 편리하게 사용할 수 있게하는 클래스
+==> ArrayList
+ArrayList<자료형> 변수명 = new ArrayList<변수명>();
+메서드
+* 값을 넣을때: add();
+* 값을 꺼낼때: get();
+* 저장된 데이터 개수를 알때 : size();
+==> JDK 기본으로 제공하는 클래스에 상세정보를 알고 싶으면
+Java Document 문서를 살펴보면 됩니다.

@@ -32,7 +32,7 @@ public class Student {
 		// 향상된 for 문으로 구현
 		for (Subject s : subjectList) {
 			total += s.getScore();
-			System.out.println("학생 " + studentName + "의"
+			System.out.println("학생 " + studentName + "의 "
 				+ s.getName() + " 과목 성적은 "
 				+ s.getScore() + "점 입니다.");
 		}
