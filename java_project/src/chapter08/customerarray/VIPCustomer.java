@@ -1,4 +1,4 @@
-package chapter08;
+package chapter08.customerarray;
 
 public class VIPCustomer extends Customer{
 	private int agentId;
@@ -44,6 +44,16 @@ public class VIPCustomer extends Customer{
 	// 재정의 하였습니다.
 	// @ 붙어있는 예약어를 어노테이션(애노테이션, annotation)이라고 합니다.
 
+	@Override
+	public String showInfo() {
+		// TODO Auto-generated method stub
+		return (
+			super.showInfo() + "담당 상담원 아이디는 "
+			+ agentId + "입니다."
+		);
+	}
+
+	
 	
 	
 	
