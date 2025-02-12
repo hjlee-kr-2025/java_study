@@ -1,0 +1,304 @@
+java
+- 명령문 마지막에 ; 를 붙여야 합니다.
+- class 로 구성되어 있습니다.
+- public static void main(String[] args) {
+	// 이곳이 실행되는 부분입니다.
+  }
+- 클래스이름.java 로 소스 파일을 만듭니다.
+- 클래스이름 첫글자를 대문자로 시작합니다.
+
+변수(자료형을 선언해서 사용)
+- 4종류 8가지
+- 1.정수형 : byte, short, int, long
+- 2.문자형 : char : '' 안에 문자하나를 데이터로 저장
+	(코드값을 사용해서 저장할수도 있습니다)
+- 3.실수형 : float, double
+- 4.논리형 : boolean
+기본자료형은 아니지만 많이 쓰는 자료형: String : 문자열과 관련된 클래스
+예) String name = "이현진"; // 큰따옴표안에 문자열을 적어서 저장합니다.
+
+연산자
+- 산술연산자 : 5가지 : +, -, *, /, % : 수학적인 계산
+- 비교연산자 : 6가지 : >, >=, <, <=, ==, !=
+- 논리연산자 : 3가지 : &&, ||, !
+
+조건문
+- if(조건1) {} else if (조건2) {} else {}
+ : else 와 if 사이에 공백을 둡니다.
+- 3항연산자(조건연산자)
+ : (조건) ? 참일때 실행 : 거짓일때 실행;
+- switch (변수) {
+case 값1:
+	break;
+} 
+
+반복문
+- while(조건) {}
+- do {} while(조건);
+- for (1번 ; 2번 ; 4번) {3번}
+- 배열과 함께 사용할 수 있는 향상된 for 문
+* 배열은 : 자료를 순차적으로 저장한 것
+-- 배열선언 방법
+1. 자료형[] 배열이름 = new 자료형[개수];
+2. 자료형 배열이름[] = new 자료형[개수];
+-- 초기값과 함께 선언
+자료형[] 배열이름 = {값1, 값2, 값3, ...};
+int[] numArray = {1, 2, 3, 4, 5};
+1. 일반 for문을 사용해서 배열변수안에 저장된 값 하나씩 출력
+for (int i = 0 ; i < numArray.length ; ++i) {
+	배열의 인덱스는 0번부터 시작합니다.
+	System.out.println(numArray[i]); // i= 0, 1, 2, 3, 4
+	// 화면에 출력은
+	/*
+		1
+		2
+		3
+		4
+		5
+	*/
+}
+2. 향상된 for 문으로 구현해 보겠습니다.
+- 향상된 for 문은 numArray 배열변수에 저장된 데이터를 0번부터
+	하나씩 꺼내서 num 에 담습니다.
+for (int num : numArray) {
+	System.out.println(num);
+}
+- 향상된 for문을 사용할 수 있는 변수는 인덱스(순서)를 가지는 변수에
+사용할 수 있습니다.
+
+
+클래스( class )
+- 변수와 함수를 가지고 있는 틀
+package 패키지이름;	// 클래스가 모여있는 공간(폴더)
+public class 클래스이름 {
+	변수1;
+	변수2;
+	
+	함수1;
+	함수2;
+}
+
+** 함수를 만드는 방법
+리턴자료형 함수이름 (매개변수) {
+	함수에서 처리할 명령문;
+	return 값;
+}
+* 두수(정수형)를 가지고 더한값을 리턴하는 함수
+-- 선언
+int add(int num1, int num2) {
+	int sum = num1 + num2;
+	return sum;
+}
+-- 사용
+	int result = add(10, 20);
+void : 리턴이 없을때는 void자료형을 함수 앞에 붙여주어야 합니다.
+
+클래스를 선언하고 클래스안에 선언한 변수 또는 함수를 사용하려면?
+- 생성을 해줘야 합니다.
+==> 생성자 를 클래스안에 선언해야 합니다.
+생성자를 선언하는 방법은
+public 클래스이름 () {}
+==> 리턴자료형이 없는 함수형태로 만들어 줍니다.
+
+* 자바는 클래스안에 선언한 생성자가 하나도 없으면 기본생성자를 자동으로
+만들어 줍니다.
+기본생성자는 매개변수가 없는 생성자 입니다.
+기본생성자 형태는
+public 클래스이름 () {}
+
+하나의 클래스안에는 여러개의 생성자가 존재할 수 있는데
+매개변수의 숫자가 달라야 합니다.
+==> 이렇게 할수 있게 하는 것이 "오버로드를 허용한다" 고 말합니다.
+
+public class Student {
+	public int studentId;
+	public String studentName;
+	public int grade;
+	
+	// 생성자
+	public Student() {
+	}
+	
+	public Student(int studentId) {
+		this.studentId = studentId;
+	}
+	
+	public Student(int studentId, String studentName) {
+		this.studentId = studentId;
+		this.studnetName = studentName;
+	}
+	
+	public Student(String studentName) {
+		this.studentName = studentName;
+	}
+	
+	==> 매개변수 숫자가 같은 생성자가 있으면 에러발생
+	==> 오버로드는 매개변수 숫자를 가지고만 허용합니다.
+	
+}
+
+==> Student 클래스를 사용해서 프로그램을 구현
+public class StudentTest {
+	public static void main(String[] args) {
+		Student studentLee = new Student(1001, "이현진");
+	}
+}
+
+public -> 접근제어자 : 어느 클래스에서든지 접근이 가능하도록 할때
+private : 나만 쓰겠다.
+protected : 나만쓰려고 했는데, 자식클래스까지는 사용을 허용하겠다.
+
+public -> 메서드(함수) 에서 주로 사용
+private, protected -> 변수에서 주로 사용합니다.
+
+
+static 예약어 :
+public static void main(String[] args) {
+}
+static 으로 선언한 변수 또는 함수는 생성하지 않고 사용이 가능합니다.
+- 생성과 관계없이 메모리를 할당합니다.
+- 프로그램이 시작될 때 자동으로 메모리 할당을 해서 사용이 가능합니다.
+
+배열을 쉽게 사용하도록 하는 클래스
+ArrayList
+- 배열을 선언하고 사용할때 방개수를 미리 지정해야 합니다.
+- 새로운 값을 추가하기가 힘듭니다.
+- 값을 추가하고, 삭제하는 것을 쉽게 합니다.
+선언하고 생성(메모리할당)방법
+ArrayList<자료형> 변수이름 = new ArrayList<자료형>();
+ArrayList<int> numArray = new ArrayList<int>();
+numArray.add(1);
+numArray.add(2);
+numArray.add(3);
+===> 3개의 값을 넣었습니다.
+// 들어있을 값을 출력할 때 2가지 방법으로 
+1. 일반 for 문 size()는 ArrayList변수안에 저장된 자료개수를 리턴합니다.
+for (int i = 0 ; numArray.size() ; ++i) {
+	// get(인덱수넘버) 는 데이터를 리턴합니다.
+	System.out.println(numArray.get(i));
+}
+2. 향상된 for 문
+for (int num : numArray) {
+	System.out.println(num);
+}
+
+(상속)
+public class Animal {
+	public void move() {
+		System.out.println("동물이 움직입니다.");
+	}
+}
+public class Human extends Animal {
+	public void read() {
+		System.out.println("사람이 책을 읽습니다");
+	}
+}
+public class AnimalTest {
+	public static void main(String[] args) {
+		Human human = new Human();
+		human.read();	// 자신클래스의 함수사용
+		human.move();	// 부모클래스의 함수사용
+	}
+}
+
+
+-- 함수의 오버라이딩
+부모의 함수를 상속받아서 자녀가 함수처리내용을 재구성하는 것
+public class Animal {
+	public void move() {
+		System.out.println("동물이 움직입니다.");
+	}
+}
+public class Human extends Animal {
+	public void read() {
+		System.out.println("사람이 책을 읽습니다");
+	}
+	@Ovrride // 자바컴파일러에 이 함수는 상속받아 재정의 한 함수입니다.
+	public void move() {
+		System.out.println("사람이 두 발로 걷습니다.");
+	}
+}
+public class AnimalTest {
+	public static void main(String[] args) {
+		Human human = new Human();
+		human.read();	// 자신클래스의 함수사용
+		human.move();	// 재정의한 move()함수 실행
+		//자녀클래스에서 부모클래스 함수를 실행하고 싶으면?
+		human.super.move(); // 부모클래스의 move()함수실행
+	}
+}
+
+다형성 - 부모클래스로 선언하고 자녀클래스로 생성하는 것
+public class Animal {
+	public void move() {
+		System.out.println("동물이 움직입니다.");
+	}
+}
+public class Human extends Animal {
+	public void move() {
+		System.out.println("사람이 두 발로 걷습니다.");
+	}
+}
+public class Tiger extends Animal {
+	public void move() {
+		System.out.println("호랑이가 네 발로 뜁니다.");
+	}
+}
+public class AnimalTest {
+	public static void main(String[] args) {
+		Animal human = new Human();
+		Animal tiger = new Tiger();
+		human.move();	// 자녀클래스에 있는 함수가 실행됩니다.
+		tiger.move();	// 자녀클래스에 있는 함수가 실행됩니다.
+	}
+}
+다형성을 활용하는것은
+배열 또는 ArrayList를 사용하여 데이터를 관리할 때 사용됩니다.
+- 배열 또는 ArrayList에는 동일한 자료형으로만 저장할 수 있습니다.
+위의 내용은 아래와같이 aniArray변수에 저장하여 관리할 수 있습니다.
+ArrayList<Animal> aniArray = new ArrayList<Animal>();
+aniArray.add(human);
+aniArray.add(tiger);
+
+Animal : 부모클래스
+ - move()
+Human, Tiger : Animal을 상속받은 자녀클래스
+ - move() : 재정의한 함수
+Animal human = new Human();
+human 은 외부에서 볼때 move() 함수를 가지고 있습니다.
+실행할때는 생성할때 사용한 Human 클래스의 move() 가 실행됩니다.
+
+Animal
+* int num;
+* void move();
+Human extends Animal
+* int num2;
+* void move(); //재정의
+* void read();
+Animal human = new Human();
+	human.num
+	human.move();
+
+
+그러면 Animal 클래스로 선언한 human변수를 가지고
+Human 클래스에만 있는 변수나 함수를 사용하려면?
+==> 다운캐스팅, instanceof
+1. 다운캐스팅을 하려면 생성한 클래스로만 캐스팅할 수 있습니다.
+2. 생성한 클래스인지 확인하는 예약어 instanceof
+if (human instanceof Human) {
+	human 이 Human으로 생성되었을때 실행되는 부분.
+}
+
+// 다운캐스팅 사용예
+1)
+if (human instanceof Human) {
+	Human h = (Human)human;
+	변수 h는 Human클래스의 변수, 함수를 사용할 수 있습니다.
+}  
+2)
+if (human instanceof Human h) {
+	변수 h는 1)번과 같은 방식으로 변수, 함수를 사용할 수 있습니다.
+}
+
+
+
