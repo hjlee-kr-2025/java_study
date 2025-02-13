@@ -14,6 +14,22 @@ class Book {
 		this.bookNumber = bookNumber;
 		this.bookTitle = bookTitle;
 	}
+
+	
+	// 자동으로 재정의 매서드를 만들어 봅니다.
+	// 1. [Shift]+[Alt]+[S]
+	// 2. Override/implement Methods
+	// 3. 재정의 할 메서드 선택 -> OK버튼클릭
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return (
+			"책넘버: " + bookNumber
+			+ ", 책제목: " + bookTitle
+		);
+	}
+	
+	
 }
 
 public class ToStringEx {
