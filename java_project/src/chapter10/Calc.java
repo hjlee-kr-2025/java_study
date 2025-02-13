@@ -20,4 +20,14 @@ public interface Calc {
 	default void description() {
 		System.out.println("정수 계산기를 구현합니다.");
 	}
+	
+	// 파라매터로 전달된 int[] 을 모두 더한 후 리턴하는 함수
+	static int total(int[] arr) {
+		int total = 0;// 더한값을 보관할 변수 선언 및 초기화
+		
+		for (int num : arr) {
+			total += num;
+		}
+		return total;
+	}
 }

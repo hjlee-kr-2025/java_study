@@ -18,5 +18,8 @@ public class CalculatorTest {
 		System.out.println(calc2.substract(num1, num2));
 		System.out.println(calc2.times(num1, num2));
 		System.out.println(calc2.divide(num1, num2));
+		
+		int[] arr = {1,2,3,4,5};
+		System.out.println(Calc.total(arr));
 	}
 }
