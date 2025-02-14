@@ -15,9 +15,11 @@ public class GenericPrinterTest {
 		Plastic plastic = plasticPrinter.getMaterial();
 		System.out.println(plasticPrinter);
 		
-		GenericPrinter<String> stringPrinter
+		// 제네릭에 extends Matrial을 지정한후 아래코드는
+		// error 가 발생합니다.
+		/*GenericPrinter<String> stringPrinter
 			= new GenericPrinter<String>();
 		stringPrinter.setMaterial(new String("abc"));
-		System.out.println(stringPrinter);
+		System.out.println(stringPrinter);*/
 	}// end of main()
 }

@@ -1,6 +1,6 @@
 package chapter12;
 
-public class GenericPrinter<T> {
+public class GenericPrinter<T extends Material> {
 	private T material;
 
 	public T getMaterial() {
