@@ -34,4 +34,18 @@ public class MemberArrayList {
 		System.out.println(memberId + "가 존재하지 않습니다.");
 		return false;
 	}
+	
+	// arrayList에 저장된 회원을 출력하는 메서드
+	public void showAllMember() {
+		System.out.println("=== 회원리스트 ===");
+		for (Member m : arrayList) {
+			System.out.println(m);
+		}
+		System.out.println("===============");
+	}
 }
+
+
+
+
+
