@@ -29,10 +29,15 @@ public enum GameLevel {
 	}
 	
 	public static void main(String[] args) {
-		GameLevel[] gameLevels = GameLevel.values();
+		/*GameLevel[] gameLevels = GameLevel.values();
 		for (GameLevel level : gameLevels) {
 			System.out.println(level);
-		}
+		}*/
+		// enum 클래스의 valueOf("상수이름");
+		// 상수이름으로 선언한 값을 변수에 담습니다.
+		GameLevel gameLevel = GameLevel.valueOf("BEGINER_LEVEL");
+		System.out.println(gameLevel.getLevel());
+		System.out.println(gameLevel.getHint());
 	}
 }
 
