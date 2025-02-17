@@ -1,13 +1,14 @@
 package chapter12.collection;
 
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Member implements Comparable<Member>{
+public class Member2 implements Comparator<Member2>{
 	private int memberId;
 	private String memberName;
 	
 	// 생성자
-	public Member(int memberId, String memberName) {
+	public Member2(int memberId, String memberName) {
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;
@@ -33,7 +34,7 @@ public class Member implements Comparable<Member>{
 
 	@Override
 	public String toString() {
-		return "Member [memberId=" + memberId + ", memberName=" + memberName + "]";
+		return "Member2 [memberId=" + memberId + ", memberName=" + memberName + "]";
 	}
 
 	@Override
@@ -46,22 +47,23 @@ public class Member implements Comparable<Member>{
 	public boolean equals(Object obj) {
 		// memberId 의 데이터가 같은지 리턴하는 메서드로
 		// 재정의 했습니다.
-		if (obj instanceof Member) {
-			Member other = (Member) obj;
+		if (obj instanceof Member2) {
+			Member2 other = (Member2) obj;
 			return memberId == other.memberId;
 		}
 		else {
 			return false;
 		}
 		
-		
 	}
 
 	@Override
-	public int compareTo(Member o) {
+	public int compare(Member2 o1, Member2 o2) {
 		// TODO Auto-generated method stub
-		return (this.memberId - o.memberId);
+		return (o1.getMemberId() - o2.getMemberId());
 	}
+
+
 	
 	
 }
