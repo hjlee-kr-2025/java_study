@@ -21,9 +21,6 @@ public class MemberHashMapTest {
 		memberHashMap.removeMember(1004);
 		memberHashMap.showAllMember();
 		
-		
-		
-		
-		
+	
 	}
 }
