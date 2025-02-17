@@ -14,6 +14,11 @@ public class Member2 implements Comparator<Member2>{
 		this.memberName = memberName;
 	}
 
+	// 기본생성자 추가
+	public Member2() {
+		// TODO Auto-generated constructor stub
+	}
+
 	// getter
 	public int getMemberId() {
 		return memberId;

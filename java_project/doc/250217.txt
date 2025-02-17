@@ -154,7 +154,13 @@ Class.forName() - static메서드
 *Map - Key, Value 쌍으로 저장
  
 
+자료형(기본자료형 8가지)
+- byte, short, int, long, char, float, double, boolean
 
+기본자료형과 동일 자료를 보관할 수 있는 클래스를 자바에서 구성했습니다.
+===> Wrapper 클래스
+- Byte, Short, Integer, Long,
+ Character, Float, Double, Boolean
 
 
 
