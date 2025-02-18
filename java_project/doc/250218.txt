@@ -1,0 +1,118 @@
+java  /  javascript
+- 두 프로그램밍 언어는 다른 언어입니다.
+- 문법에서 공통적인 부분이 많이 있습니다.
+- 명령문 끝에 ; 을 사용합니다.
+- 변수명에 : 영문자, 숫자, _ 를 사용할 수 있고, 숫자가 앞에 올 수 없습니다.
+    (자바에서는 위규칙에 $를 추가로 사용할 수 있습니다)
+- 연산자
+	* 산술연산자 : +, -, *, /, %
+	* 비교연산자 : >, >=, <, <=, ==, !==
+	* 논리연산자 : &&, ||, !
+	* 대입연산자 : =
+- 조건문
+	if () {
+	}
+	else if () {
+	}
+	else {
+	}
+	
+	switch () {
+	case 값1:
+		break;
+	default:
+	}
+- 반복문
+	while () {
+	}
+	do {
+	} while() ;
+	for ( ; ; ) {
+	}
+	(자바에서는 향상된 for 문을 사용할 수 있습니다)
+	for (배열저장자료형 변수명 : 배열변수명) {
+		// 사용은 변수명으로 사용
+	}
+
+== 자바에서는
+1. 변수에 자료형을 선언합니다.
+기본자료형(8가지)
+byte,		short,	int,		long
+char,		float,	double,		boolean
+Wrapper Class(8가지)	
+Byte,		Short,	Integer,	Long
+Character,	Float,	Double,		Boolean
+
+2. 클래스 구조로 프로그래밍 됩니다.
+- 멤버변수
+- 메서드
+- 클래스는 생성해야 사용할 수 있습니다.
+	=> 생성자: 클래스이름으로 되어있는 반환자료형표시가 없는 메서드
+예)
+public class Student {
+	// 멤버변수
+	private int no;
+	private String name;
+	// 생성자
+	public Student() {}
+	//=> 기본생성자, 생성자구현이 없으면 컴파일러가 자동으로 만들어 줍니다.
+	
+	// 생성자
+	public Student(int no, String name) {
+		this.no = no;
+		this.name = name;
+	}
+	//=> 생성자를 같은이름이 다양하게 사용할 수 있도록 하는것이
+	// "오버로드" 라고 합니다.
+	
+	// private 변수는 클래스 내부에서만 사용할 수 있습니다.
+	// private(자기만), public(모든클래스) : 접근제어자
+	// private변수를 외부에서 값을 읽거나 변경하기위해 사용하는것이
+	// getter와 setter입니다.
+	// getter와 setter는 메서드 입니다.
+	public int getNo() {
+		return no;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+}	
+
+생성자의 오버로드
+1. 이름이 같습니다.
+2. 파라매터가 다릅니다.
+public class Student {
+	private int no;
+	private String name;
+	public Student() {}
+	public Student(int no) {}
+	public Student(int no, String name) {}
+}
+
+* 클래스는 상속을 합니다.
+- 부모클래스의 멤버변수(field), 메서드를 자유롭게 사용할 수 있습니다.
+- 메서드는 그래도도 사용하고, 일부변형 또는 전체 재구성해서 사용할 수 있습니다.
+- 변형 또는 재구성하는 것은 "오버라이드"라고 합니다.
+- 상속할때 사용하는 예약어는 extends 입니다.
+public class 자식클래스 extends 부모클래스 {
+}
+- 부모클래스는 하나만 적을 수 있습니다.
+- 모든 자바의 클래스는 Object 클래스를 상속받았습니다.
+- toString(), equals(), clone(), hashCode() 
+
+
+
+
+
+
+
+
+
+		    
