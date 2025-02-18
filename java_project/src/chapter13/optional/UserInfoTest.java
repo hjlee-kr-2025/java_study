@@ -1,6 +1,7 @@
 package chapter13.optional;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class UserInfoTest {
 
@@ -11,20 +12,30 @@ public class UserInfoTest {
 		userInfoList.add(new UserInfo(12346, "Tomas"));
 		userInfoList.add(new UserInfo(12347, "Edward"));
 		
-		UserInfo userInfo = getUserInfoById(12348, userInfoList);
+		Optional<UserInfo> userInfoOptional = getUserInfoById(12347, userInfoList);
 		//id : 12345, 12346, 12347 ==> OK
 		//id : 12348 ==>
-		System.out.println(userInfo.getName());
+		// 아이디를 찾아서 있으면 화면에 출력
+		// 없으면 아무일도 하지 않습니다.
+		userInfoOptional
+		.ifPresent(userInfo-> System.out.println(userInfo.getName()));
+		
+		if (userInfoOptional.isPresent()) {
+			System.out.println(userInfoOptional.get().getName());
+		}
+		else {
+			System.out.println("User not found....");
+		}
 	}
 	
-	public static UserInfo
+	public static Optional<UserInfo>     
 		getUserInfoById(int id, ArrayList<UserInfo> list) {
 		for (UserInfo userInfo : list) {
 			if (userInfo.getId() == id) {
-				return userInfo;
+				return Optional.of(userInfo);
 			}
 		}
-		return null;
+		return Optional.empty();
 	}
 	
 }
