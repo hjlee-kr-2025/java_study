@@ -188,5 +188,22 @@ int add(int num1, int num2) {
 (int num1, int num2) -> {return num1 + num2;}
 
  
+Object 클래스 - 모든클래스의 상위클래스
+: 모든클래스는 Object 클래스를 상속받았습니다.
+public String toString() {
+	return "패키지이름.클래스이름@참조주소값"
+}
+변수이름으로 System.out.println(변수이름); 을 사용하면
+toString() 가 실행됩니다.
+public boolean equals(Object obj) {
+	return this == obj; // 참조주소값이 같으면 true
+}
+clone() -> 복제(깊은복사) -> 생성하고 같은데이터를 대입합니다.
+hashCode() -> 참조주소값 리턴합니다.
+
+
+
+
+
 
 		    
