@@ -1,0 +1,29 @@
+Source 메뉴에 대한 설명
+1. Override/Implement Methods...
+- Override : 상속받은 메서드를 재정의
+- Implement : 구현안된 메서드를 구현
+==> 메서드 재정의와 구현을 자동으로 완성해주는 메뉴
+
+2. Generate Getters and Setters...
+- 클래스가 가지고 있는 멤버변수의 getter와 setter를
+자동으로 만들어주는 메뉴
+
+3. Generate Delegate Methods...
+- 멤버변수 중
+ 클래스자료형(Byte, Short, Integer, Long, Character, Float, Long,
+ Boolean, String)을 다른 자료형으로 변경할 수 있는 함수를 만들어 줍니다.
+ 
+4. Genarate hashCode() and equals()...
+- Object 클래스의 hashCode()와 equals()메서드를 재정의
+- Object 의 equals는 참조주소가 같아야 true를 리턴하는데
+==> 자동으로 재정의 할때는 데이터가 같으면 true가 리턴되도록 만들어 줍니다.
+
+5. Generate toString()...
+- Object 클래스의 toString() 메서드를 재정의
+==> 자동으로 데이터값을 문자열로 변환하여 리턴되도록 구현해 줍니다.
+
+6. Generate Constructor using Fields...
+==> 멤버변수를 사용해서 생성자를 자동으로 만들어 줍니다.
+
+7. Generate Constructor from superclass... 
+==> 기본클래스를 만들어 줍니다.

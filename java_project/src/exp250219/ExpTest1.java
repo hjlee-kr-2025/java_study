@@ -98,6 +98,16 @@ public class ExpTest1 {
 			System.out.println(studentList.get(i));
 			// => Student클래스안의 toString() 가 실행됩니다.
 		}
+		System.out.println("저장된 데이터 개수 : " + studentList.size());
+		
+		// ArrayList 의 remove(인덱스) 메서드는 저장된 값을
+		// 꺼냅니다. (ArrayList에는 삭제됩니다)
+		// while 반복문
+		while (studentList.size() > 0) {
+			System.out.println(studentList.remove(0));
+			System.out.println("저장된 데이터 개수 : " + studentList.size());
+		}
+		
 	}
 }
 
