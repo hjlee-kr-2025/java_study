@@ -5,7 +5,7 @@ package exp250219;
 // 메서드 선언시 abstract 예약어를 생략할 수 있습니다.
 interface Service {
 	// 실행할 메서드 선언
-	public Object service(Object obj) throws Exception;
+	public Object service(Object obj);
 	// 리턴타입과 매개변수를 Object로 선언하면
 	// 모든자료형을 다 사용할 수 있습니다.
 }
@@ -18,7 +18,7 @@ class AddService implements Service {
 	public static int sum = 0;
 
 	@Override
-	public Object service(Object obj) throws Exception {
+	public Object service(Object obj) {
 		// TODO Auto-generated method stub
 		sum = sum + (int)obj;
 		return sum;
@@ -28,7 +28,7 @@ class AddService implements Service {
 
 
 public class ExpTest3 {
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args){
 		// 부모클래스로 선언하고 자녀클래스로 생성했습니다.
 		Service addFunction = new AddService();
 		// main메서드에서만 사용되는 지역변수
