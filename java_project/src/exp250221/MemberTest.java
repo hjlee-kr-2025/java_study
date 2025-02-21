@@ -49,15 +49,42 @@ public class MemberTest {
 				break; // case "2":
 			case "3":// 회원정보 1명 ---> 회원번호를 입력받아 정보를 보여줍니다.
 				int no = In.getInt("회원번호를 입력하세요");
+				boolean isNotFound = true;	// 회원번호로 회원이 있는지를 알려주는 변수
 				for (Member m : memberList) {
-					if (m.getNo() == no) {
+					if (m.getNo() == no) {// 입력한 회원번호가 리스트에 있으면?
 						// 회원정보 출력
+						System.out.println("회원번호 : " + m.getNo());
+						System.out.println("이름 : " + m.getName());
+						System.out.println("나이 : " + m.getAge());
+						System.out.println("주소 : " + m.getAddress());
+						System.out.println("성별 : " + m.getGender());
+						isNotFound = false;// 있으니까 변수값 변경
 						break;// for() 문을 빠져나가는 break문입니다.
 					}
 				}
+				if (isNotFound) {
+					System.out.println("*** 회원정보가 없습니다. ***");
+				}
 				break; // case "3":
-			case "4":
-				break;
+			case "4":// 회원삭제 - 회원번호를 가지고 삭제를 진행합니다.
+				// case 3에서 no을 int형으로 선언했기 때문에
+				// 변수이름으로 사용할 수 있습니다.
+				no = In.getInt("회원번호를 입력하세요");
+				isNotFound = true;
+				for (Member m : memberList) {
+					if (m.getNo() == no) {
+						memberList.remove(m);
+						isNotFound = false;
+						System.out.println
+						("회원번호:" + m.getNo() +", "
+						+ m.getName() + " 회원정보가 삭제되었습니다.");
+						break; // for문을 빠져나갑니다.
+					}
+				}
+				if (isNotFound) {
+					System.out.println("*** 회원정보가 없습니다. ***");
+				}
+				break; // case "4":
 			case "0":
 				System.out.println("회원관리 시스템이 종료됩니다.");
 				System.out.println("bye bye....");
