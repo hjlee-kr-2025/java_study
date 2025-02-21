@@ -9,14 +9,19 @@ public class Library {
 		shelf.add("태백산맥 1");
 		shelf.add("태백산맥 2");
 		shelf.add("태백산맥 3");
-		shelf.add("태백산맥 4");
-		shelf.add("태백산맥 5");
-		shelf.add("태백산맥 6");
-		shelf.add("태백산맥 7");
+	//	shelf.add("태백산맥 4");
+	//	shelf.add("태백산맥 5");
+	//	shelf.add("태백산맥 6");
+	//	shelf.add("태백산맥 7");
 	}
 	
 	public synchronized String lendBook() throws InterruptedException {
 		Thread t = Thread.currentThread();
+		if (shelf.size() == 0) {
+			System.out.println(t.getName() + " waiting start");
+			wait();// notify() 가 실행되기 전까지 기다립니다.
+			System.out.println(t.getName() + " waiting end");
+		}
 		String book = shelf.remove(0);
 		System.out.println(t.getName() + " : " + book + " lend");
 		return book;
@@ -25,6 +30,7 @@ public class Library {
 	public synchronized void returnBook(String book) {
 		Thread t = Thread.currentThread();
 		shelf.add(book);
+		notify();// 책이 반납되었을때 wait()를 깨워서 빌릴 수 있도록 합니다.
 		System.out.println(t.getName() + " : " + book + " return");
 	}
 }// end of class
