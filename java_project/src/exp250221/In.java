@@ -20,7 +20,7 @@ public class In {
 		while (true) {
 			try {
 				// 문자열을 int type으로 바꿔주는 메서드
-				Integer.parseInt(getStr(msg));
+				return Integer.parseInt(getStr(msg));
 				// ==> 숫자문자열이 아닌 아닌 문자가 섞여있으면 예외가 발생됩니다.
 				// ==> try~catch문안에 구형하였습니다.
 			} catch (Exception e) {
