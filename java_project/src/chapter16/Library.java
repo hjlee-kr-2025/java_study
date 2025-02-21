@@ -17,7 +17,7 @@ public class Library {
 	
 	public synchronized String lendBook() throws InterruptedException {
 		Thread t = Thread.currentThread();
-		if (shelf.size() == 0) {
+		while (shelf.size() == 0) {
 			System.out.println(t.getName() + " waiting start");
 			wait();// notify() 가 실행되기 전까지 기다립니다.
 			System.out.println(t.getName() + " waiting end");
@@ -30,7 +30,7 @@ public class Library {
 	public synchronized void returnBook(String book) {
 		Thread t = Thread.currentThread();
 		shelf.add(book);
-		notify();// 책이 반납되었을때 wait()를 깨워서 빌릴 수 있도록 합니다.
+		notifyAll();// 책이 반납되었을때 wait()를 전부 깨웁니다.
 		System.out.println(t.getName() + " : " + book + " return");
 	}
 }// end of class

@@ -11,6 +11,8 @@ public class LibraryMain {
 		Student std4 = new Student();
 		Student std5 = new Student();
 		Student std6 = new Student();
+		Student std7 = new Student();
+		Student std8 = new Student();
 		
 		std1.start();
 		std2.start();
@@ -18,5 +20,7 @@ public class LibraryMain {
 		std4.start();
 		std5.start();
 		std6.start();
+		std7.start();
+		std8.start();
 	}
 }
