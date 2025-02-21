@@ -3,6 +3,8 @@ package exp250221;
 // 회원정보가 들어가는 클래스(한명의 회원정보)
 public class Member {
 	private static int serialNo = 1000;// 회원번호로 사용할 번호 
+	// => static 변수는 새로 생성되지 않습니다.
+	// => 한번만 만들어집니다
 	
 	// 회원이 가지는 정보
 	private int no;			// 회원번호는 자동으로 지정됩니다.
