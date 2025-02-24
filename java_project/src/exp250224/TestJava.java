@@ -79,6 +79,18 @@ public class TestJava {
 		if (noteBook instanceof NoteBook n) {
 			n.playing();
 		}
+		
+		/* 
+		 * 인터페이스
+		 */
+		Calc add = new Add();
+		Calc substract = new Substract();
+		int result;
+		result = add.calculation(10, 20);
+		System.out.println(result);
+		result = substract.calculation(10, 20);
+		System.out.println(result);
+		
 	}// end of main
 }// end of class TestJava
 
@@ -513,7 +525,37 @@ class NoteBook extends Computer {
 	
 }
 
+/*
+ * 인터페이스 : interface
+ * 추상메서드만 가지고 있는 클래스
+ * 추상메서드를 선언할때 사용하는 abstract 예약어 생략이 가능합니다.
+ * 인터페이스에서 선언된 멤버변수는 모두 상수가 됩니다.
+ * (final static) 이 됩니다.
+ * 인터페이스는 상속해서 사용됩니다.
+ * 인터페이스는 여러개를 동시에 상속이 됩니다.
+ * 클래스에서 인터페이스를 상속받을때는 implements 예약어를 사용합니다.
+ */
 
+interface Calc {
+	public int calculation(int num1, int num2);
+}
 
+class Add implements Calc {
 
+	@Override
+	public int calculation(int num1, int num2) {
+		// TODO Auto-generated method stub
+		return num1 + num2;
+	}
+	
+}
 
+class Substract implements Calc {
+
+	@Override
+	public int calculation(int num1, int num2) {
+		// TODO Auto-generated method stub
+		return num1 - num2;
+	}
+	
+}
