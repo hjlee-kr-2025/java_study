@@ -34,6 +34,15 @@ public class TestJava {
 		op.operator1(10, 3);
 		op.operator2(10, 3);
 		op.operator3(true, false);
+		
+		// 키보드를 입력해야해서 주석처리 하였습니다.
+	/*	menuExample menu = new menuExample();
+		String str = menu.menu();
+		System.out.println(str);*/
+		
+		Loop loop = new Loop();
+		loop.whileTest();
+		loop.doWhileTest();
 	}
 }
 
@@ -173,21 +182,78 @@ class menuExample {
 				for (String m : menuList) {
 					str.append(m + ", ");
 				}
+				str.append("을 주문하였습니다.");
 				return str.toString();
 			default:
 				System.out.println("잘못누르셨습니다. 다시입력해주세요");
 			}	// end of switch(menu)
 			
-			System.out.println("현재 주문내역은 ");
-			for (String m : menuList) {
-				System.out.println(m);
+			if (menuList.size() == 0) {
+				System.out.println("현재 주문내역이 없습니다.");
 			}
-			System.out.println("입니다.");
+			else {
+				System.out.println("현재 주문내역은 ");
+				for (String m : menuList) {
+					System.out.println(m);
+				}
+				System.out.println("입니다.");
+			}
 		}	// end of while(true)
 	}	// end of menu()
 }	// end of class
 
-
+/*
+ * 반복문
+ */
+class Loop {
+	/*
+	 * while
+	 * 폼)
+	 * while (반복조건) {
+	 *    참일때 실행되는 내용
+	 * }
+	 */
+	void whileTest() {
+		// 1부터 100까지 숫자 중 3으로 나눈 나머지가 1인 숫자를
+		// 모두 더한값을 출력합니다.
+		/*
+		 * 정수자료형 : int
+		 * 나머지를 구하는 연산자 : %
+		 * 반복을 위한 : while
+		 * 조건을 위한 : if
+		 */
+		int num = 1; // 1부터 100까지 증가시킬 변수
+		int sum = 0; // 이곳에 더한값을 저장하려고 합니다.
+		// num 이 100보다 작거나 같을때 까지 반복작업을 수행합니다.
+		while (num <= 100) {
+			if (num % 3 == 1) {
+				sum += num; // sum = sum + num;
+			}
+			++num;// 1증가
+		}
+		System.out.println("결과값: " + sum);
+	}
+	/*
+	 * do while
+	 */
+	void doWhileTest() {
+		// 키보드로 숫자 하나를 입력받아서
+		// 5제곱수를 출력하는 프로그램
+		// do ~ while
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("0~9 중 하나를 입력하세요 : ");
+		String strNum = scanner.nextLine();
+		int num = Integer.parseInt(strNum);
+		int mul = 1; // 계산한 값을 담은 변수(곱해서 변함없는 수: 1)
+		int count = 0;
+		do {
+			mul *= num;
+			++count;
+		} while (count < 5 && mul != 0);
+		// => 5번을 곱하고, 단 계산값이 0이 아닌동안(num:0 일때는 한번만)
+		System.out.println(num + "의 5승 계산값 : " + mul);
+	}
+}
 
 
 
