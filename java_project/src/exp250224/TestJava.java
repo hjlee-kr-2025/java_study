@@ -620,3 +620,14 @@ class Divide implements Calc {
 	}
 	
 }
+
+
+/*
+ * 키보드 입력을 위한 클래스 사용
+ * public static Scanner scanner = new Scanner(System.in);
+ * String str = scanner.nextLine();
+ */
+ 
+
+
+
