@@ -7,6 +7,8 @@
 package exp250224;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /*
@@ -42,7 +44,12 @@ public class TestJava {
 		
 		Loop loop = new Loop();
 		loop.whileTest();
-		loop.doWhileTest();
+	//	loop.doWhileTest(); //=> 키보드 입력하는 프로그램이어서 주석처리
+	//	loop.forTest(); // => 키보드 입력으로 주석처리
+		//==> loop 는 참조형변수입니다.
+		System.out.println(loop);
+		// ==> 출력값: exp250224.Loop@5b480cf9
+		// Object.toString() 가 실행되는 것입니다.
 	}
 }
 
@@ -252,13 +259,142 @@ class Loop {
 		} while (count < 5 && mul != 0);
 		// => 5번을 곱하고, 단 계산값이 0이 아닌동안(num:0 일때는 한번만)
 		System.out.println(num + "의 5승 계산값 : " + mul);
+	}// end of doWhileTest()
+	
+	/*
+	 * for 문
+	 */
+	void forTest() {
+		// 키보드로 2~9 중 하나를 입력받으면
+		// 구구단을 출력하는 프로그램을 만들어 주세요
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("구구단 중 알고 싶은 단의 숫자를 입력하시요.");
+		System.out.println("2~9 중 하나를 입력합니다 :");
+		String numStr = scanner.nextLine();
+		int num = Integer.parseInt(numStr);
+		System.out.println("*** " + num + "단 ***");
+		for (int i = 1 ; i <= 9 ; ++i) {
+			System.out.println(num + " * " + i + " = " + (num*i));
+		}
+		
+	}// end of forTest()
+}
+
+/*
+ * 클래스 (객체) 
+ * - 멤버변수
+ * - 생성자
+ * - 메서드
+ */
+class Student {
+	//멤버변수 + 접근제어자
+	private int studentNo;
+	protected String studentName;
+	public int grade;
+	// 접근제어자 : private, protected, public
+	// private: 선언한 클래스에서만 사용합니다.
+	// protected: 선언한 클래스와 상속받은 클래스에서 사용가능
+	// public: 누구나 사용할 수 있다.
+	/*
+	 * 멤버변수는 private 또는 protected로 선언하고
+	 * 다른 클래스에서 접근해야 할 경우 getter, setter를 통해
+	 * 사용하도록 하는 방법을 추천합니다.
+	 */
+	// 멤버변수에는 데이터가 저장됩니다.
+	
+	// 생성자
+	public Student() {
+		// 기본생성자,
+		// 생성자가 아무것도 없으면 기본생성자를 자동으로 만들어줍니다.
+		// 다른생성자가 있다면? 기본생성자를 사용시 구현이 필요합니다.
 	}
+	
+	public Student(int studentNo, String studentName) {
+		// Student(int studentNo, String studentName)에 
+		// 있는 변수는 지역변수(메서드 안에서만 사용)
+		// 전역변수(멤버변수,클래스변수)를 사용하려면 this를 붙여서
+		// 사용하시면 됩니다.
+		this.studentNo = studentNo;
+		this.studentName = studentName;
+	}
+	
+	/*
+	 * 메서드
+	 * 리턴자료형 함수이름(매개변수) {
+	 *    처리내용
+	 *    return 값;
+	 * }
+	 */
+	public String getStudentName() {
+		return studentName;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+		// 리턴type이 void이면 return 을 생략할 수 있습니다.
+		// void에서 리턴을 사용하고 싶으면 return; 처럼 값없이 사용합니다.
+	}
+	
+	/*
+	 * 자바에서 클래스를 통해서 프로그램이 진행이 됩니다.
+	 * 클래스를 사용하기 위해서는 생성을 해야합니다.
+	 * 생성하지 않고 사용하는것은 static으로 선언된 경우입니다.
+	 * static으로 선언한 변수는 하나만 메모리할당이 됩니다.
+	 * static으로 선언하지 않은 변수는 생성할때 마다 메모리할당이 됩니다.
+	 * 클래스를 생성한 변수 -> 인스턴스
+	 * 다형성에서 instanceof 클래스이름 로 생성(메모리할당)한 클래스이름확인
+	 * 변수의 자료형이 클래스로 되어있는 것을
+	 * 클래스자료형(참조자료형) 이라고 부릅니다.
+	 * 참조자료형 변수를 System.out.println(참조자료형변수명); 으로
+	 * 출력하면 "패키지.클래스이름@참조주소" 를 화면에 출력합니다.
+	 */
+
+	/*
+	 * static 변수 또는 메서드를 사용하는 방법
+	 * 클래스이름.변수, 클래스이름.메서드(); 로 변수명이 아닌 클래스명으로
+	 * 직접 접근해서 사용합니다.
+	 */
+	
+	/*
+	 * final 예약어 (마지막)
+	 * 변수 - 변수값을 변경할 수 없다 -> 상수로 사용됩니다.
+	 * 메서드 - 함수처리내용을 변경할 수 없다 -> 재정의 하지 못한다.
+	 * 클래스 - 이 클래스는 변경할 수 없다 -> 상속할 수 없습니다.
+	 */
+	
 }
 
 
+/*
+ * 배열 & ArrayList(7장) & 컬렉션 프레임워크(12장)
+ * -- 컬렉션 프레임워크는 자료를 관리하는 인터페이스, 클래스 집합을 의미
+ * -- Collection 인터페이스 - 한개의 자료
+ * * List : 데이터내용 중복을 허용합니다. 순서가 있습니다.
+ * * Set : 데이터내용 중복을 허용안함.
+ * -- Map 인터페이스 - <Key, Value> 한쌍의자료
+ * 
+ * Collection 대표 : ArrayList 클래스
+ * Map 대표 : HashMap 클래스
+ */
+class DataSave {
+	public static ArrayList<String> nameList = new ArrayList<String>();
+	public static HashMap<Integer, String> nameMap = new HashMap<Integer, String>();
+}
 
-
-
+class DataSaveTest {
+	void SavaData() {
+		DataSave.nameList.add(new String("Kim"));
+		DataSave.nameList.add(new String("Lee"));
+		DataSave.nameList.add(new String("Sim"));
+		DataSave.nameList.add(new String("Jung"));
+		DataSave.nameList.add(new String("Cho"));
+		
+		DataSave.nameMap.put(1, "Kim");
+		DataSave.nameMap.put(2, "Lee");
+		DataSave.nameMap.put(3, "Sim");
+		DataSave.nameMap.put(4, "Jung");
+		DataSave.nameMap.put(5, "Cho");
+	}
+}
 
 
 
