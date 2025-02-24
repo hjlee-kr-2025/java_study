@@ -6,6 +6,9 @@
  */
 package exp250224;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /*
  * 여기서 TestJava.java 파일로 만들어졌습니다.
  * public class TestJava {} 로 만들어서 사용합니다.
@@ -98,6 +101,102 @@ class Operator {
 		System.out.println(!isOne);	//NOT
 	}
 }
+
+/*
+ * 조건문
+ */
+class IfExample {
+	// 두수를 매개변수로 받아서 큰 수를 리턴
+	int max(int num1, int num2) {
+		if (num1 > num2) {
+			// 참이면 이곳을 실행합니다.
+			return num1;
+		}
+		return num2;
+	}
+	// 두수를 매개변수로 받아서 작은 수를 리턴 (단, 같으면 0을 리턴)
+	int min(int num1, int num2) {
+		if (num1 > num2) {
+			return num2;
+		}
+		else if (num1 == num2) {
+			return 0;
+		}
+		else {
+			return num1;
+		}
+	}
+}
+
+/*
+ * switch
+ */
+class menuExample {
+	// 키보드 입력받을 준비는 아래와 같이 선언하고 생성합니다.
+	public static Scanner scanner = new Scanner(System.in);
+	
+	String menu() {
+		ArrayList<String> menuList = new ArrayList<String>();
+
+		while (true) {
+			System.out.println("===== 메뉴판 =====");
+			System.out.println("1. 자장면, 2. 짬뽕");
+			System.out.println("3. 볶음밥, 4. 탕수육");
+			System.out.println("5. 군만두, 9. 주문취소");
+			System.out.println("0. 주문완료");
+			System.out.println("메뉴선택 >> ");
+			String menu = scanner.nextLine();
+			// ===> 키보드 입력받을때 위 명령을 기억하세요
+			switch(menu) {
+			case "1":
+				menuList.add(new String("자장면"));
+				break;
+			case "2":
+				menuList.add(new String("짬뽕"));
+				break;
+			case "3":
+				menuList.add(new String("볶음밥"));
+				break;
+			case "4":
+				menuList.add(new String("탕수육"));
+				break;
+			case "5":
+				menuList.add(new String("군만두"));
+				break;
+			case "9":
+				// ArrayList 클래스의 clear() 메서드는
+				// 리스트내용을 전부 지웁니다.
+				menuList.clear();
+				break;
+			case "0":
+				StringBuilder str = new StringBuilder();
+				for (String m : menuList) {
+					str.append(m + ", ");
+				}
+				return str.toString();
+			default:
+				System.out.println("잘못누르셨습니다. 다시입력해주세요");
+			}	// end of switch(menu)
+			
+			System.out.println("현재 주문내역은 ");
+			for (String m : menuList) {
+				System.out.println(m);
+			}
+			System.out.println("입니다.");
+		}	// end of while(true)
+	}	// end of menu()
+}	// end of class
+
+
+
+
+
+
+
+
+
+
+
 
 
 
