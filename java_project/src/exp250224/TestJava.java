@@ -90,6 +90,9 @@ public class TestJava {
 		System.out.println(result);
 		result = substract.calculation(10, 20);
 		System.out.println(result);
+		Calc divide = new Divide();
+		result = divide.calculation(10, 0);
+		System.out.println(result);
 		
 	}// end of main
 }// end of class TestJava
@@ -584,3 +587,36 @@ class Substract implements Calc {
  * - 동적할당을 위해서 사용되기도 합니다.
  * - Class.forName(); ==> 동적할당에 사용되는 메서드 입니다.
  */
+
+
+/*
+ * 예외처리 - Exception
+ */ 
+
+class Divide implements Calc {
+
+	@Override
+	public int calculation(int num1, int num2) {
+		// TODO Auto-generated method stub
+		int result;
+		/*
+		 * 예외처리는
+		 * try {
+		 * }
+		 * catch (Exception e) {
+		 *    e.printStackTrace();
+		 * }
+		 * finally {
+		 * }
+		 */
+		try {
+			result = num1 / num2;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("num2 = 0 입니다.");
+			return 0;
+		}
+		return result;
+	}
+	
+}
