@@ -56,8 +56,31 @@ public class TestJava {
 		dataSaveTest.SavaData();
 		dataSaveTest.showArrayListData();
 		dataSaveTest.showHashMapData();
-	}
-}
+		
+		Desktop desktop = new Desktop();
+		desktop.turnOn();
+		desktop.display();
+		Computer computer = new Desktop();
+		computer.turnOn();
+		computer.display();
+		Computer noteBook = new NoteBook();
+		noteBook.turnOn();
+		noteBook.display();
+		// noteBook 은 NoteBook에만 구현된
+		// playing()메서드는 실행 할 수 없습니다.
+		// => 다운캐스팅을 해서 실행해야 하는데
+		// 자녀클래스로 생성되었는지 물어보는 예약어가 instanceof 입니다.
+		/*
+		 * 부모클래스로 선언하고 자녀클래스로 생성해서 사용하는 것을
+		 * 다형성 이라고 합니다.
+		 * instaceof 예약어를 같이 기억해 주세요
+		 */
+		// if (선언변수명 instanceof 생성클래스명 다운캐스팅변수명) {}
+		if (noteBook instanceof NoteBook n) {
+			n.playing();
+		}
+	}// end of main
+}// end of class TestJava
 
 // 변수 & 자료형
 class Variable {
@@ -438,7 +461,57 @@ class DataSaveTest {
 	}
 }
 
+/*
+ * 추상클래스 : abstract
+ */
+abstract class Computer {
+	// 추상클래스에는 추상메서드가 포함될 수 있습니다.
+	public abstract void display();
+	
+	public void turnOn() {
+		System.out.println("전원을 켭니다.");
+	}
+}
+/*
+ * 추상클래스는 상속을 주는 클래스입니다. 
+ * 상속을 받은 클래스가 추상메서드를 구현하여 사용합니다.
+ */
+class Desktop extends Computer {
 
+	@Override
+	public void display() {
+		// TODO Auto-generated method stub
+		System.out.println("Desktop display()");
+	}
+	
+}
+/*
+ * 클래스에서 상속이란?
+ * 1. 클래스를 상속받을때는 extends 예약어를 사용합니다.
+ * 2. 부모클래스의 멤버변수, 메서드를 자유롭게 사용할 수 있습니다.
+ * 3. 부모클래스의 메서드는 재정의 해서 사용할 수도 있습니다.
+ * 4. 추상메서드는 자녀클래스가 재정의(구현)해서 사용합니다.
+ * 5. 부모클래스 메서드를 재정의(구현) 하는것을 override(오버라이드)라고 합니다.
+ * 6. 클래스 상속은 하나만 가능합니다.
+ * 7. 추상클래스는 생성자가 없습니다.
+ */
+
+/* 다형성 테스트를 위해
+ * 아래 클래스를 하나더 만들었습니다.
+ */
+class NoteBook extends Computer {
+
+	@Override
+	public void display() {
+		// TODO Auto-generated method stub
+		System.out.println("NoteBook display()");
+	}
+	
+	public void playing() {
+		System.out.println("NoteBook only playing()");
+	}
+	
+}
 
 
 
