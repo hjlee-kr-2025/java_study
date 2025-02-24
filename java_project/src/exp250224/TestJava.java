@@ -8,6 +8,7 @@ package exp250224;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -50,6 +51,11 @@ public class TestJava {
 		System.out.println(loop);
 		// ==> 출력값: exp250224.Loop@5b480cf9
 		// Object.toString() 가 실행되는 것입니다.
+		
+		DataSaveTest dataSaveTest = new DataSaveTest();
+		dataSaveTest.SavaData();
+		dataSaveTest.showArrayListData();
+		dataSaveTest.showHashMapData();
 	}
 }
 
@@ -393,6 +399,42 @@ class DataSaveTest {
 		DataSave.nameMap.put(3, "Sim");
 		DataSave.nameMap.put(4, "Jung");
 		DataSave.nameMap.put(5, "Cho");
+	}
+	
+	void showArrayListData() {
+		// ArrayList 의 데이터를 가져올때는
+		// for 문을 사용하면 됩니다.
+		// 1. 일반 for문을 사용합니다. (전통적인 방식)
+		System.out.println("1. 일반 for문으로 ArrayList의 데이터 가져오기");
+		for (int i = 0 ; i < DataSave.nameList.size() ; ++i) {
+			// 인덱스를 가지고 데이터를 가져와서 출력합니다.
+			System.out.println(DataSave.nameList.get(i));
+		}
+		System.out.println("2. 향상된 for문으로 ArrayList의 데이터 가져오기");
+		for (String name : DataSave.nameList) {
+			System.out.println(name);
+			//==> 선언한 변수명(자료형은 ArrayList의 저장된 데이터자료형)
+		}
+	}// end of showArrayListData()
+	
+	void showHashMapData() {
+		/*
+		 * HashMap 데이터는 순서가 없기때문에 for 문으로 가져오기가
+		 * 어렵습니다. ==> Iterator 인터페이스를 사용해서
+		 * 값을 하나씩 꺼내옵니다.
+		 * --> 제네릭에 적을 자료형 key값의 자료형을 적습니다.
+		 * Map 에 저장된 자료는 key값으로 제어합니다. 
+		 */
+		Iterator<Integer> ir = DataSave.nameMap.keySet().iterator();
+		/*
+		 * hasNext()는 데이터가 있느냐?를 체크하는 메서드 입니다.
+		 */
+		System.out.println("3. HashMap 자료형 데이터 출력");
+		while (ir.hasNext()) {
+			int key = ir.next(); //값을 꺼내서 리턴
+			String name = DataSave.nameMap.get(key);
+			System.out.println(name);
+		}
 	}
 }
 
