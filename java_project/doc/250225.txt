@@ -1,11 +1,51 @@
-1. shopping.com 사이트를 만든다고 생각합니다.
-2. 일반게시판
-3. 백엔드에 관련된 부분 (DB를 제외하고)
-
 초대링크
 
 https://us04web.zoom.us/j/74029100899?pwd=4VfWnq1gs7KGJ6FQu5KZlavBzhJRDm.1
 
 740 2910 0899
 암호: wzRur1
+
+
+1. shopping.com 사이트를 만든다고 생각합니다.
+2. 일반게시판
+3. 백엔드에 관련된 부분 (DB를 제외하고)
+4. Java 프로젝트 생성
+5. package 구성에 대한 내용
+com.shopping.페이지종류.하는일or역할 
+일반게시판 -> board
+
+하는일 
+1. 메뉴 (Controller)
+	(게시글쓰기, 게시글 리스트, 게시글 상세보기, 게시글 수정, 삭제)
+	---> CRUD (Create, Read, Update, Delete)
+2. Service -> CRUD로 넘어가서 처리하는 부분
+3. 데이터를 담는 클래스 -> VO
+4. 데이스베이스를 처리하는 부분 -> DAO
+
+com.shopping.board.controller
+com.shopping.board.service
+com.shopping.board.vo
+com.shopping.board.dao
+
+일반게시판에 들어갈 데이터는?
+1. 글번호 - 데이터의 유일한 key (primary key - 중복되지 않은 값)
+   - 글번호 역순으로 정렬하면 최근글이 가장 앞으로 오게됩니다.
+2. 글제목
+3. 글내용
+4. 작성자
+5. 비밀번호
+6. 작성일
+7. 조회수
+
+
+
+
+
+
+
+
+
+
+
+
 
