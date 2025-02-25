@@ -3,6 +3,7 @@ package com.shopping.board.dao;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.shopping.board.vo.BoardVO;
 
@@ -34,4 +35,34 @@ public class BoardDAO {
 		result =1;
 		return result;
 	}
+	
+	// 리스트
+	public ArrayList<BoardVO> list() throws Exception {
+		// 결과 담을 변수
+		ArrayList<BoardVO> list = null;
+		// 리스트에서 표시할 데이터
+		// 1. 글번호, 2. 제목, 3. 작성자, 4. 작성일, 5. 조회수
+		Iterator<BoardVO> ir = boardList.iterator();
+		while (ir.hasNext()) {
+			BoardVO tempVo = ir.next();
+			BoardVO vo = new BoardVO();
+			vo.setNo(tempVo.getNo());
+			vo.setTitle(tempVo.getTitle());
+			vo.setWriter(tempVo.getWriter());
+			vo.setWriteDate(tempVo.getWriteDate());
+			vo.setHit(tempVo.getHit());
+			
+			if (list == null) list = new ArrayList<BoardVO>();
+			list.add(vo);
+		}
+		
+		return list;
+	}
 }
+
+
+
+
+
+
+
