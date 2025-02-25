@@ -4,10 +4,14 @@ import java.util.Scanner;
 
 // Scanner 클래스를 이용해서 키보드 입력을 위한 클래스
 public class In {
+	// Scanner 클래스는 입력을 다양한 자료형으로 변경시켜줄수 있는
+	// 클래스
 	private static Scanner scanner = new Scanner(System.in);
 	
 	// 키보드 입력받는 메서드
 	public static String getStr() {
+		// Scanner Class 안의 nextLine() 메서드
+		// [Enter] 키 입력전까지 만들어진 내용을 문자열로 리턴합니다.
 		return scanner.nextLine();
 	}
 	
