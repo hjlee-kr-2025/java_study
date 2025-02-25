@@ -1,5 +1,6 @@
 package com.shopping.board.controller;
 
+import com.shopping.board.service.BoardWriteService;
 import com.shopping.board.vo.BoardVO;
 import com.shopping.util.Execute;
 import com.shopping.util.In;
@@ -21,6 +22,8 @@ public class BoardController {
 			System.out.println("---------------------------");
 			
 			String menu = In.getStr("메뉴");
+			
+			Object result = null;
 			
 			try {
 				// 프로그램 실행부분
@@ -44,7 +47,10 @@ public class BoardController {
 					vo.setWriter(writer);
 					vo.setPw(pw);
 					
-					Execute.execute(null, vo);
+					// 서비스 실행 (로그클래스를 통해서)
+					result = Execute.execute(new BoardWriteService(), vo);
+					
+					// 결과 표시
 					break;
 				case "2":
 					System.out.println("2.리스트");
