@@ -1,5 +1,7 @@
 package com.shopping.util;
 
+import java.util.Arrays;
+
 import com.shopping.board.service.Service;
 
 public class Execute {
@@ -30,8 +32,27 @@ public class Execute {
 		// service 객체를 클래스로 변경을 합니다. -> service.getClass();
 		// ==> Object 클래스의 메서드 중 하나입니다.
 		// 2. 클래스 이름을 패키지와 함께 가져옵니다
-		// => getName(); 
+		// => getName();
+		System.out.println("- 실행 객체 이름 : "
+				+ service.getClass().getName());
 		
+		// 서비스로 넘어가는 데이터를 출력합니다.
+		System.out.println("- 넘어 가는 데이터 출력 : " +
+			((obj instanceof Object[])
+			?Arrays.toString((Object[])obj)
+			:obj)
+			);
+		
+		// service 실행
+		result = service.service(obj);
+		// => service 를 실행하고 처리한 결과가 result 변수에 담깁니다.
+		
+		// 끝나는 시간을 저장
+		Long end = System.nanoTime();
+		
+		// 결과출력
+		System.out.println("- 실행 결과 : " + result);
+		System.out.println("- 실행 시간(ns) : " + (end - start));
 
 		return result;
 	} // end of execute()
