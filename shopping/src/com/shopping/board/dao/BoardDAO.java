@@ -58,6 +58,39 @@ public class BoardDAO {
 		
 		return list;
 	}
+	
+	public Integer increase(Long no) throws Exception {
+		// 결과저장변수
+		Integer result = 0;
+		
+		return result;
+	}
+	
+	// 글보기 (상세보기), 수정을 위해 글을 가져올 때 
+	public BoardVO view(Long no, Long hit) throws Exception {
+		// 결과값 저장할 변수
+		BoardVO vo = null;
+		
+		for (int i = 0 ; i < boardList.size() ; ++i) {
+			BoardVO tempVo = boardList.get(i);
+			if (no == tempVo.getNo()) {
+				vo = new BoardVO();
+				vo.setNo(tempVo.getNo());
+				vo.setTitle(tempVo.getTitle());
+				vo.setContent(tempVo.getContent());
+				vo.setWriteDate(tempVo.getWriteDate());
+				vo.setWriter(tempVo.getWriter());
+				vo.setPw(tempVo.getPw());
+				vo.setHit(tempVo.getHit() + hit);
+				if (hit == 1L) {
+					// 조회수가 증가되었을때 리스트값 변경
+					boardList.set(i, vo);
+				}
+			}
+		}
+		
+		return vo;
+	}
 }
 
 
