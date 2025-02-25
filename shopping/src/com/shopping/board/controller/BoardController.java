@@ -1,5 +1,7 @@
 package com.shopping.board.controller;
 
+import com.shopping.board.vo.BoardVO;
+import com.shopping.util.Execute;
 import com.shopping.util.In;
 
 // 메뉴를 선택하는데 많이 사용하는 클래스이름입니다.
@@ -28,8 +30,21 @@ public class BoardController {
 				// dao -> service -> controller
 				// ===> 리턴으로 데이터가 전달됩니다.
 				switch (menu) {
-				case "1":
+				case "1":// 글등록
 					System.out.println("1.글등록");
+					// 4가지 데이터를 키보드를 통해 입력받습니다.
+					String title = In.getStr("제목");
+					String content = In.getStr("내용");
+					String writer = In.getStr("작성자");
+					String pw = In.getStr("비밀번호");
+					// 서비스로 넘길 데이터를 하나로 만들어줍니다.
+					BoardVO vo = new BoardVO();
+					vo.setTitle(title);
+					vo.setContent(content);
+					vo.setWriter(writer);
+					vo.setPw(pw);
+					
+					Execute.execute(null, vo);
 					break;
 				case "2":
 					System.out.println("2.리스트");
