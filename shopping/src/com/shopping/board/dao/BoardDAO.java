@@ -86,10 +86,57 @@ public class BoardDAO {
 					// 조회수가 증가되었을때 리스트값 변경
 					boardList.set(i, vo);
 				}
+				break;// for () 블럭을 빠져나옵니다.
 			}
 		}
 		
 		return vo;
+	}
+	
+	
+	// 글수정
+	public Integer update(BoardVO vo) throws Exception {
+		// 결과값을 저장할 변수
+		Integer result = 0;
+		for (int i = 0 ; i < boardList.size() ; ++i) {
+			BoardVO tempVo = boardList.get(i);
+			
+			if (tempVo.getNo() == vo.getNo()
+				&& tempVo.getPw() == vo.getPw()) {
+				BoardVO saveVO = new BoardVO();
+				saveVO.setNo(vo.getNo());
+				saveVO.setPw(vo.getPw());
+				saveVO.setTitle(vo.getTitle());
+				saveVO.setContent(vo.getContent());
+				saveVO.setWriter(vo.getWriter());
+				saveVO.setHit(tempVo.getHit());
+				saveVO.setWriteDate(tempVo.getWriteDate());
+				boardList.set(i, saveVO);
+				result = 1;
+				break; // for() 블럭을 빠져나옵니다.
+			}
+		}
+		
+		return result;
+	}
+	
+	// 글삭제
+	public Integer delete(BoardVO vo) throws Exception {
+		// 결과담을 변수선언
+		Integer result = 0;
+		
+		Iterator<BoardVO> ir = boardList.iterator();
+		while (ir.hasNext()) {
+			BoardVO tempVo = ir.next();
+			if (tempVo.getNo() == vo.getNo()
+				&& tempVo.getPw() == vo.getPw()) {
+				boardList.remove(tempVo);
+				result = 1;
+				break;
+			}
+		}
+		
+		return result;
 	}
 }
 

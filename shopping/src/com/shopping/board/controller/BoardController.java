@@ -2,6 +2,7 @@ package com.shopping.board.controller;
 
 import com.shopping.board.service.BoardDeleteService;
 import com.shopping.board.service.BoardListService;
+import com.shopping.board.service.BoardUpdateService;
 import com.shopping.board.service.BoardViewService;
 import com.shopping.board.service.BoardWriteService;
 import com.shopping.board.vo.BoardVO;
@@ -115,6 +116,39 @@ public class BoardController {
 			} // end of try~catch
 		} // end of while(true)
 	} // end of main
+	
+	public void update(BoardVO vo) throws Exception {
+		while (true) {
+			// 확인용 데이터 출력
+			
+			// 수정할 항목을 선택 메뉴구성
+			System.out.println();
+			System.out.println("1.제목, 2.내용, 3.작성자, 9.취소, 0.수정완료");
+			String menu = In.getStr("수정항목");
+			switch (menu) {
+			case "1":
+				vo.setTitle(In.getStr("제목"));
+				break;
+			case "2":
+				vo.setContent(In.getStr("내용"));
+				break;
+			case "3":
+				vo.setWriter(In.getStr("작성자"));
+				break;
+			case "9":
+				System.out.println("수정을 취소하였습니다.");
+				return;
+			case "0":
+				vo.setPw(In.getStr("본인확인용 비밀번호"));
+				Execute.execute(new BoardUpdateService(), vo);
+				break;
+			default:
+				System.out.println("잘못 입력하셨습니다.");
+				System.out.println("[1-3,9,0] 중 하나를 선택하세요");
+			} // end of switch (menu)
+		} // end of while (true)
+	} // end of update()
+	
 } // end of class
 
 
