@@ -1,5 +1,8 @@
 package com.shopping.board.controller;
 
+import com.shopping.board.service.BoardDeleteService;
+import com.shopping.board.service.BoardListService;
+import com.shopping.board.service.BoardViewService;
 import com.shopping.board.service.BoardWriteService;
 import com.shopping.board.vo.BoardVO;
 import com.shopping.util.Execute;
@@ -52,17 +55,51 @@ public class BoardController {
 					
 					// 결과 표시
 					break;
-				case "2":
+				case "2":// 리스트
 					System.out.println("2.리스트");
+					// 리스트는 서비스 실행시 전달할 데이터가 없습니다.
+					// 서비스 실행
+					result = Execute.execute(new BoardListService(), null);
+					
+					// 받은 결과 표시
 					break;
-				case "3":
+				case "3":// 글보기 - 상세보기
 					System.out.println("3.글보기");
+					// 글보기위해서 필요한 것? - 데이터 중 유일한 값인 글번호를
+					// 가지고 상세내용을 가져옵니다.
+					// 키보드로 받을 데이터는 글번호
+					// 전달할때 글번호와 조회수증가에 관련된 값을 넘겨줍니다.
+					Long no = In.getLong("글번호");
+					//1. long[] data1 = {no, 1L}; 
+					//2. Long[] data = new Long[] {no, 1L};
+					// 서비스 실행
+					result = Execute.execute(new BoardViewService(), new Long[] {no, 1L});
+					
+					// 결과 출력
 					break;
-				case "4":
+				case "4": // 글수정
 					System.out.println("4.글수정");
+					// 글수정을 위해서 글번호가 필요합니다.
+					// 수정할 글 데이터를 가져옵니다.
+					no = In.getLong("글번호");
+					result = Execute.execute(new BoardViewService(), new Long[] {no, 0L});
+					// 글수정부분은 이곳에..
 					break;
-				case "5":
+				case "5": // 글삭제
 					System.out.println("5.글삭제");
+					// 글삭제를 위해 필요한 데이터?
+					// 1. 글번호, 2. 비밀번호
+					no = In.getLong("글번호");
+					pw = In.getStr("비밀번호");
+					// 위의 두 데이터는 자료형이 같지 않기 때문에 배열로 전달할 수 없습니다.
+					// BoardVO에 담아서 전달하도록 합니다.
+					vo = new BoardVO();
+					vo.setNo(no);
+					vo.setPw(pw);
+					
+					result = Execute.execute(new BoardDeleteService(), vo);
+					
+					// 처리결과
 					break;
 				case "0":
 					System.out.println("프로그램이 종료됩니다.");
