@@ -1,7 +1,7 @@
 package com.shopping.board.service;
 
-// C: 글쓰기(글작성)
-public class BoardWriteService implements Service{
+// U: 일반게시판 글수정 서비스
+public class BoardUpdateService implements Service {
 
 	@Override
 	public Object service(Object obj) throws Exception {
