@@ -26,5 +26,25 @@ public class BoardPrint {
 			);
 		}
 		System.out.println("****************************************");
-	}
-}
+	}// end of print(List<BoardVO>)
+	
+	// 데이터 1개를 출력하는 메서드
+	public void print(BoardVO vo) {
+		System.out.println();
+		System.out.println("********************************");
+		System.out.println("    게시판 글보기 ");
+		System.out.println("********************************");
+		System.out.println("글번호 : " + vo.getNo());
+		System.out.println("제목 : " + vo.getTitle());
+		System.out.println("내용 : " + vo.getContent());
+		System.out.println("작성자 : " + vo.getWriter());
+		System.out.println("작성일 : " + vo.getWriteDate());
+		System.out.println("조회수 : " + vo.getHit());
+		System.out.println("********************************");
+	}// end of print(BoardVO)
+} // end of class
+
+
+
+
+
