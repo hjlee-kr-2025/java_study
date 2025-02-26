@@ -85,6 +85,9 @@ public class BoardController {
 					no = In.getLong("글번호");
 					result = Execute.execute(new BoardViewService(), new Long[] {no, 0L});
 					// 글수정부분은 이곳에..
+					// result가 Object이기 때문에
+					// BoardVO 로 다운캐스팅해서 넘겨줍니다.
+					update((BoardVO)result);
 					break;
 				case "5": // 글삭제
 					System.out.println("5.글삭제");
@@ -117,7 +120,7 @@ public class BoardController {
 		} // end of while(true)
 	} // end of main
 	
-	public void update(BoardVO vo) throws Exception {
+	public static void update(BoardVO vo) throws Exception {
 		while (true) {
 			// 확인용 데이터 출력
 			

@@ -1,0 +1,21 @@
+프로젝트 구조
+* com.shopping.board.controller ==> 메뉴
+	- BoardController.java
+* com.shopping.board.dao		==> 데이터를 저장하거나 가져오는부분
+	- BoardDAO.java
+* com.shopping.board.service	==> 기능에따른 처리분류
+	- Service.java  (interface)
+	- BoardWriteService.java
+	- BoardListService.java
+	- BoardViewService.java
+	- BoardUpdateService.java
+	- BoardDeleteService.java
+* com.shopping.board.vo
+	- BoardVO.java
+* com.shopping.util   ==> 부가기능, 편리기능
+	- Execute.java	=> 서비스를 실행할때 발생되는 로그 화면 표시
+	- In.java 		=> 키보드 입력에 대한 처리
+
+
+
+
