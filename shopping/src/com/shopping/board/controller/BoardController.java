@@ -31,7 +31,7 @@ public class BoardController {
 			
 			try {
 				// 프로그램 실행부분
-				// 실제메뉴처리 : CRUD
+				// 실제메뉴처리 : CRUD (Create, Read, Update, Delete)
 				// controller(여기)-> service -> dao: 실행
 				// ===> 파라메터로 데이터가 전달됩니다.  
 				// dao -> service -> controller
