@@ -43,7 +43,9 @@ public class BoardDAO {
 		// 리스트에서 표시할 데이터
 		// 1. 글번호, 2. 제목, 3. 작성자, 4. 작성일, 5. 조회수
 		Iterator<BoardVO> ir = boardList.iterator();
+		// Iterator hasNext() 다음에 꺼낼 자료가 있나요?
 		while (ir.hasNext()) {
+			// next() : 자료를 꺼내서 리턴 + 위치이동
 			BoardVO tempVo = ir.next();
 			BoardVO vo = new BoardVO();
 			vo.setNo(tempVo.getNo());

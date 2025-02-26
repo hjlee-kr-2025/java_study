@@ -95,7 +95,12 @@ public class BoardController {
 					// 글수정부분은 이곳에..
 					// result가 Object이기 때문에
 					// BoardVO 로 다운캐스팅해서 넘겨줍니다.
-					update((BoardVO)result);
+					if (result == null) {
+						System.out.println("글번호가 잘못 입력되었습니다.");
+					}
+					else {
+						update((BoardVO)result);
+					}
 					break;
 				case "5": // 글삭제
 					System.out.println("5.글삭제");
@@ -141,6 +146,10 @@ public class BoardController {
 			
 			// 수정할 항목을 선택 메뉴구성
 			System.out.println();
+			System.out.println("제목 : " + vo.getTitle());
+			System.out.println("내용 : " + vo.getContent());
+			System.out.println("작성자 : " + vo.getWriter());
+			System.out.println("--------------------------");
 			System.out.println("1.제목, 2.내용, 3.작성자, 9.취소, 0.수정완료");
 			String menu = In.getStr("수정항목");
 			switch (menu) {
