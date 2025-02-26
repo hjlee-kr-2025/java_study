@@ -102,7 +102,7 @@ public class BoardDAO {
 			BoardVO tempVo = boardList.get(i);
 			
 			if (tempVo.getNo() == vo.getNo()
-				&& tempVo.getPw() == vo.getPw()) {
+				&& tempVo.getPw().equals(vo.getPw())) {
 				BoardVO saveVO = new BoardVO();
 				saveVO.setNo(vo.getNo());
 				saveVO.setPw(vo.getPw());
@@ -129,7 +129,7 @@ public class BoardDAO {
 		while (ir.hasNext()) {
 			BoardVO tempVo = ir.next();
 			if (tempVo.getNo() == vo.getNo()
-				&& tempVo.getPw() == vo.getPw()) {
+				&& tempVo.getPw().equals(vo.getPw())) {
 				boardList.remove(tempVo);
 				result = 1;
 				break;

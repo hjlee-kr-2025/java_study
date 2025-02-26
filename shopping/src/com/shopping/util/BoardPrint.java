@@ -16,14 +16,19 @@ public class BoardPrint {
 		System.out.println("****************************************");
 		System.out.println(" 번호  /  제목  /  작성자  /  작성일  / 조회수");
 		System.out.println("****************************************");
-		for (BoardVO vo : list) {
-			System.out.println(
-				vo.getNo() + " / " +
-				vo.getTitle() + " / " +
-				vo.getWriter() + " / " +
-				vo.getWriteDate() + " / " +
-				vo.getHit()
-			);
+		if (list == null) {
+			System.out.println("등록된 글이 없습니다.");
+		}
+		else {
+			for (BoardVO vo : list) {
+				System.out.println(
+					vo.getNo() + " / " +
+					vo.getTitle() + " / " +
+					vo.getWriter() + " / " +
+					vo.getWriteDate() + " / " +
+					vo.getHit()
+				);
+			} // end of for
 		}
 		System.out.println("****************************************");
 	}// end of print(List<BoardVO>)
@@ -34,12 +39,17 @@ public class BoardPrint {
 		System.out.println("********************************");
 		System.out.println("    게시판 글보기 ");
 		System.out.println("********************************");
-		System.out.println("글번호 : " + vo.getNo());
-		System.out.println("제목 : " + vo.getTitle());
-		System.out.println("내용 : " + vo.getContent());
-		System.out.println("작성자 : " + vo.getWriter());
-		System.out.println("작성일 : " + vo.getWriteDate());
-		System.out.println("조회수 : " + vo.getHit());
+		if (vo == null) {
+			System.out.println("작성된 내용이 없습니다.");
+		}
+		else {
+			System.out.println("글번호 : " + vo.getNo());
+			System.out.println("제목 : " + vo.getTitle());
+			System.out.println("내용 : " + vo.getContent());
+			System.out.println("작성자 : " + vo.getWriter());
+			System.out.println("작성일 : " + vo.getWriteDate());
+			System.out.println("조회수 : " + vo.getHit());
+		}
 		System.out.println("********************************");
 	}// end of print(BoardVO)
 } // end of class

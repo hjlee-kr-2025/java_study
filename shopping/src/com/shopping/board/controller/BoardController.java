@@ -1,11 +1,14 @@
 package com.shopping.board.controller;
 
+import java.util.List;
+
 import com.shopping.board.service.BoardDeleteService;
 import com.shopping.board.service.BoardListService;
 import com.shopping.board.service.BoardUpdateService;
 import com.shopping.board.service.BoardViewService;
 import com.shopping.board.service.BoardWriteService;
 import com.shopping.board.vo.BoardVO;
+import com.shopping.util.BoardPrint;
 import com.shopping.util.Execute;
 import com.shopping.util.In;
 
@@ -55,6 +58,9 @@ public class BoardController {
 					result = Execute.execute(new BoardWriteService(), vo);
 					
 					// 결과 표시
+					if ((Integer)result == 1) {
+						System.out.println("** 새로운 글이 등록되었습니다. **");
+					}
 					break;
 				case "2":// 리스트
 					System.out.println("2.리스트");
@@ -63,6 +69,7 @@ public class BoardController {
 					result = Execute.execute(new BoardListService(), null);
 					
 					// 받은 결과 표시
+					new BoardPrint().print((List<BoardVO>)result);
 					break;
 				case "3":// 글보기 - 상세보기
 					System.out.println("3.글보기");
@@ -76,7 +83,8 @@ public class BoardController {
 					// 서비스 실행
 					result = Execute.execute(new BoardViewService(), new Long[] {no, 1L});
 					
-					// 결과 출력
+					// 결과 출력 - 자료1개 출력
+					new BoardPrint().print((BoardVO)result);
 					break;
 				case "4": // 글수정
 					System.out.println("4.글수정");
@@ -104,6 +112,13 @@ public class BoardController {
 					result = Execute.execute(new BoardDeleteService(), vo);
 					
 					// 처리결과
+					if ((Integer)result == 1) {
+						System.out.println("글이 삭제되었습니다.");
+					}
+					else {
+						System.out.println("글번호 또는 비밀번호가 다릅니다.");
+						System.out.println("다시 확인하시고 시도해 주세요.");
+					}
 					break;
 				case "0":
 					System.out.println("프로그램이 종료됩니다.");
@@ -143,8 +158,15 @@ public class BoardController {
 				return;
 			case "0":
 				vo.setPw(In.getStr("본인확인용 비밀번호"));
-				Execute.execute(new BoardUpdateService(), vo);
-				break;
+				Integer result = (Integer)Execute.execute(new BoardUpdateService(), vo);
+				if (result == 1) {
+					System.out.println("글 수정이 완료되었습니다.");
+				}
+				else {
+					System.out.println("글번호 또는 비밀번호가 다릅니다.");
+					System.out.println("확인하시고 다시 시도해 주세요.");
+				}
+				return;// update() 메서드가 종료되도록
 			default:
 				System.out.println("잘못 입력하셨습니다.");
 				System.out.println("[1-3,9,0] 중 하나를 선택하세요");
