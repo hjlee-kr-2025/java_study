@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.shopdb.board.vo.BoardVO;
+
 public class MainController {
 	private static final String DRIVER
 		= "com.mysql.cj.jdbc.Driver";
@@ -19,7 +21,7 @@ public class MainController {
 
 	public static void main(String[] args) {
 		
-		ArrayList<> list = new ArrayList<E>();
+		ArrayList<BoardVO> listVO = new ArrayList<>();
 		
 		// 1. 드라이버 확인
 		try {
@@ -48,12 +50,30 @@ public class MainController {
 			// 6. 데이터 표시 또는 저장(클라이언트)
 			if (rs != null) {
 				while (rs.next()) {
+					BoardVO vo = new BoardVO();
+					vo.setNo(rs.getInt("no"));
+					vo.setTitle(rs.getString("title"));
+					vo.setWriter(rs.getString("writer"));
+					vo.setWriteDate(rs.getString("writeDate"));
+					vo.setHit(rs.getInt("hit"));
 					
+					listVO.add(vo);
 				}
 			}
-			
-			
-			
+			System.out.println("** 일반게시판 리스트 **");
+			System.out.println("글번호    |   제목    |   작성자"
+					+ "    |    작성일      |   조회수");
+			for (BoardVO vo : listVO) {
+				System.out.println(vo.getNo() + "  |  "
+					+ vo.getTitle() + "  |  "
+					+ vo.getWriter() + "  |  "
+					+ vo.getWriteDate() + "  |  "
+					+ vo.getHit());
+			}
+			// 7. DB 닫기
+			con.close();
+			pstmt.close();
+			if (rs != null) rs.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
