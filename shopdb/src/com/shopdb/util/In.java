@@ -18,7 +18,7 @@ public class In {
 	public static Integer getInt(String msg) {
 		while (true) {
 			try {
-				return Integer.parseInt(msg);
+				return Integer.parseInt(getStr(msg));
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println("숫자만 입력하셔야 합니다.");
