@@ -19,7 +19,8 @@ public class MainController {
 	private static final String PW
 		= "java";
 
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
+	public static void test() {// main 대신 임의의 메서드 이름으로 변경
 		
 		ArrayList<BoardVO> listVO = new ArrayList<>();
 		
