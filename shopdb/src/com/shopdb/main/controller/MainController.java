@@ -38,7 +38,8 @@ public class MainController {
 			Connection con = DriverManager.getConnection(URL, ID, PW);
 			// 3. SQL 쿼리를 만들어 줍니다.
 			String list = ""
-					+ "select no, title, writer, writeDate, "
+					+ "select no, title, writer,"
+					+ " date_format(writeDate, '%Y-%m-%d') as writeDate, "
 					+ " hit from board order by no desc "
 					+ "";
 			// select no, title, writer, writeDate, hit
