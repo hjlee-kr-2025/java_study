@@ -18,7 +18,7 @@ public class SubjectDAO extends DAO {
 	// 과목 만들기
 	// 과목 리스트 보기
 	
-	// 1. 과목 리스트 보기
+	// 1. 과목 리스트 보기 (select)
 	public List<SubjectVO> list() throws Exception {
 		// 결과 저장 변수 선언
 		List<SubjectVO> list = null;
@@ -48,6 +48,9 @@ public class SubjectDAO extends DAO {
 					vo.setSubjectName(rs.getString("subjectName"));
 					// ==> rs.getxxx(칼럼이름) 으로 값을 가져옵니다.
 					// xxx 는 vo의 멤버 변수의 자료형에 따라서 사용하시면 됩니다.
+					
+					// DB에서 받은 데이터중 한 과목의 데이터 추가
+					list.add(vo);
 				}
 			}
 			
@@ -56,16 +59,59 @@ public class SubjectDAO extends DAO {
 			e.printStackTrace();
 		} finally {
 			// 7. DB닫기
+			DB.close(con, pstmt, rs);
 		}
+		/* try~catch~finally 블럭은 예외처리를 위한 블럭입니다.
+		 * try 블럭은 정상적으로(예외가 발생할 수 있는) 실행되는 부분입니다.
+		 * catch 블럭은 try 블럭을 실행중 예외가 발생했을때 명령문이 중단되고
+		 * 실행되는 블럭입니다. (try블럭에서 예외발생 이후부분은 실행되지 않습니다)
+		 * finally 블럭은 try블럭 또는 catch블럭이 끝나고 실행되는 블럭입니다.
+		 *    try 또는 catch에 return 등으로 메서드가 끝나게 하더라고
+		 *    finally는 실행하고 메서드가 끝나게 됩니다.
+		 */
 		
 		// 결과를 리턴
 		return list;
 	} // end of list()
 	
+	// 3. 과목등록 (insert) 
+	public Integer write(String subjectName) throws Exception {
+		// 결과 저장할 변수 선언
+		Integer result = null;
+		
+		try {
+			// 1. 드라이버확인 - 이미확인완료
+			// 2. DB연결
+			con = DB.getConnenction();
+			// 3. SQL작성 - 클래스하단에 WRTIE로 작성.
+			// 4. 실행객체 SQL + 데이터 세팅
+			pstmt = con.prepareStatement(WRITE);
+			pstmt.setString(1, subjectName);
+			// => 쿼리문의 첫번째 ?가 1번이고 순서대로 번호를 지정합니다. 
+			// 5. 실행 및 결과받기
+			result = pstmt.executeUpdate();
+			// 6. 결과 확인 
+			// return 이후에 처리
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB닫기
+			DB.close(con, pstmt);
+		}
+		
+		// 결과 리턴
+		return result;
+	}
+	
 	
 	// SQL문
 	private static final String LIST = ""
 			+ "select subjectId, subjectName from subject";
+	private static final String WRITE = ""
+			+ "insert into subject (subjectName) values (?)";
+	// ? 은 사용자로 부터 입력받는 데이터 입니다.
 }
 
 
