@@ -1,0 +1,17 @@
+**** lombok 라이브러리 설치 및 프로젝트에 등록하는 방법
+1. https://projectlombok.org/ 에 접속
+2. download 탭 클릭(화면상단)
+3. 파일 다운로드 => pc의  downloads 폴더에 기본저장
+4. cmd(커맨드)창을 열고
+5. cd downloads 실행하여 downloads 폴더로 이동
+6. java -jar lombok.jar 실행
+7. lombok 설치화면에서 사용하는 eclipse 선택 후 install
+8. 화면에 나오지 않으면 폴더를 선택(이클립스가 있는 경로선택)
+9. eclipse폴더로 가서 lombok.jar 파일과 eclipse.ini에 
+lombok이 등록되어있는지 확인
+10. 이클립스 project에서 오른쪽마우스를 누르고
+ bulid path-> configure build path  선택
+11. libraries 탭 선택
+12. classpath 선택
+13. add externel jars 선택
+14. eclipse 폴더에서 lombok.jar 선택후 apply
