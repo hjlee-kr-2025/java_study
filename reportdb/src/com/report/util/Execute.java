@@ -29,9 +29,12 @@ public class Execute {
 		// 실행객체를 출력합니다. (어떠한 서비스가 실행되는지)
 		// 1. service 인터페이스객체를 클래스객체로 변경합니다.
 		// service.getClass() 를 사용 -> Class 클래스 타입으로 리턴됩니다.
+		// => service 가 어떤 클래스로 생성되었는지 알려줍니다.
 		// 2. 클래스이름을 패키지와 함께 리턴합니다.
 		// Class class 내의 getName() 메서드 이용
 		System.out.println("실행 객체 이름 : " + service.getClass().getName());
+		// SubjectListService를 실행했다면
+		// 실행 객체 이름 : com.report.service.SubjectListService
 		
 		// 서비스로 전달되는 데이터를 출력
 		// 배열인지 아닌지
@@ -50,6 +53,9 @@ public class Execute {
 				(obj instanceof Object[])?Arrays.toString((Object[])obj):obj
 			)
 		);
+		// 위의 서버스로 넘어가는 데이터는 둘 중 하나 자신이 편한것을
+		// 사용하시면 됩니다.
+		
 		
 		// 서비스 실행
 		result = service.service(obj);
@@ -68,4 +74,10 @@ public class Execute {
 		// 결과를 리턴합니다.
 		return result;
 	} // end of execute(Service service, Object obj)
+	
+	// Controller -> Execute.execute() -> Service
+	// 결과값(return) Service -> Execute.execute() -> Controller
+	
+	
+	
 }

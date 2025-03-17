@@ -15,6 +15,16 @@ public class SubjectDAO extends DAO {
 	 * Class에서 상속이란?
 	 * 상속받은 클래스가 부모클래스의 멤버변수, 메서드를 자유롭게 사용할 수 있도록 하는것.
 	*/
+	/* 데이터베이스를 접근해서 처리하는 7단계
+	 * 1. 드라이버확인 - 한번만 확인하면 끝
+	 * 2. DB연결 - DB클래스 (URL, ID, PW)
+	 * 3. SQL문작성 - 문자열, 넘길데이터 ?로 표시합니다.
+	 * 4. 실행객체에 데이터(SQL+넘길데이터) 세팅 - ?는 1번부터 순서대로 세팅
+	 * 5. 실행 + 결과받기
+	 * 6. 결과 처리
+	 * 7. DB닫기 - DB클래스를 호출하여 처리
+	 * 
+	 */
 	// 과목 만들기
 	// 과목 리스트 보기
 	
@@ -36,6 +46,11 @@ public class SubjectDAO extends DAO {
 			pstmt = con.prepareStatement(LIST);
 			// 5. SQL명령문실행 + 결과받기(ResultSet)
 			rs = pstmt.executeQuery();
+			/* 쿼리를 실행하는 메서드
+			 * executeQuery() - return ==> ResultSet - select, insert, update, delete
+			 * executeUpdate() - return ==> Integer - insert, update, delete
+			 * 
+			 */
 			// 6. 결과 처리 (저장 또는 표현)
 			if (rs != null) {
 				// rs.next() 메서드는 현시점에서 다음값이 있는지를 확인합니다.
@@ -88,7 +103,7 @@ public class SubjectDAO extends DAO {
 			pstmt = con.prepareStatement(WRITE);
 			pstmt.setString(1, subjectName);
 			// => 쿼리문의 첫번째 ?가 1번이고 순서대로 번호를 지정합니다. 
-			// 5. 실행 및 결과받기
+			// 5. 실행 및 결과받기 - insert, update, delete : executeUpdate() return Integer 
 			result = pstmt.executeUpdate();
 			// 6. 결과 확인 
 			// return 이후에 처리

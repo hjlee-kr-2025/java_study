@@ -21,3 +21,17 @@ public class SubjectVO {
 	private Integer subjectId;
 	private String subjectName;
 }
+
+/*
+ * VO (Value Object)
+ * - DB 테이블의 값을 저장할 때 사용
+ * - DB의 열이름과 같은 이름으로 변수명을 사용합니다.(많은 곳에서)
+ * - 클래스이름은 table이름에 VO를 붙여서 주로 사용합니다.
+ * - getter, setter,
+ * - toString() - vo의 모든데이터를 보여주도록 오버라이팅구현된.
+ * 
+ * 
+ * 
+ */
+
+
