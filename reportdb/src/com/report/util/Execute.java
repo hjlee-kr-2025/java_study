@@ -38,13 +38,13 @@ public class Execute {
 		
 		// 서비스로 전달되는 데이터를 출력
 		// 배열인지 아닌지
-		String putSeriveData;
+		String putSeriveData = null;
 		if (obj instanceof Object[]) {
 			putSeriveData = Arrays.toString((Object[])obj);
 			// Arrays.toString(); 은 배열자료형의 모든데이터를 문자열로 변환해줍니다.
 		}
-		else {
-			putSeriveData = (String)obj;
+		else if (obj != null){
+			putSeriveData = obj.toString();
 		}
 		System.out.println("서비스로 넘어가는 데이터 : " + putSeriveData);
 		// 위 구현 내용을 3항연산자를 사용해서 표현해 봤습니다.

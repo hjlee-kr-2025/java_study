@@ -21,6 +21,7 @@ public class StudentDAO extends DAO {
 			// 2. DB 연결
 			con = DB.getConnenction();
 			// 3. SQL 작성 - 클래스하단 LIST 상수에 구현합니다. 
+			System.out.println(LIST);
 			// 4. 실행객체에 SQL+데이터 세팅
 			pstmt = con.prepareStatement(LIST);
 			// 쿼리문에 ?가 없어서 세팅할 데이터는 없습니다.
@@ -62,6 +63,7 @@ public class StudentDAO extends DAO {
 			// 2. DB 연결
 			con = DB.getConnenction();
 			// 3. SQL작성 - WRITE 상수 (클래스하단)
+			System.out.println(WRITE);
 			// 4. 실행객체에 SQL + 데이터 세팅
 			pstmt = con.prepareStatement(WRITE);
 			// ? 개수만큼 set 사용, 첫번째? 가 1번

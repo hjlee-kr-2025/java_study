@@ -6,6 +6,8 @@ import com.report.util.In;
 public class MainController {
 	// 과목클래스 선언
 	private static SubjectController subjectController = new SubjectController();
+	// 학생클래스 선언
+	private static StudentController studentController = new StudentController();
 	
 	public static void main(String[] args) throws ClassNotFoundException {
 		System.out.println("학생성적관리 프로그램입니다.");
@@ -28,6 +30,7 @@ public class MainController {
 				subjectController.execute();
 				break;
 			case "2":
+				studentController.execute();
 				break;
 			case "3":
 				break;
