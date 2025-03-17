@@ -53,7 +53,7 @@ public class SubjectController {
 					}
 					break;
 				case "0":
-					break;
+					return ;// SubjectController의 execute() 가 종료
 				default:
 					System.out.println("잘못입력하셨습니다.");
 					System.out.println("1,3,0 중 하나를 입력하세요.");
