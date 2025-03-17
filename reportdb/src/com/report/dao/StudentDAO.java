@@ -2,8 +2,9 @@ package com.report.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.report.util.DB;
+import com.report.util.Execute;
+import com.report.util.StudentPrint;
 import com.report.vo.StudentVO;
 
 /* DAO 상속받은 이유는 DB 상호작용을 하기위한 변수 3가지를 사용하기 위해서입니다.
@@ -51,7 +52,44 @@ public class StudentDAO extends DAO {
 		return list;
 	} // end of list()
 	
-	// 2. 학생 상세보기 - skip
+	// 2. 학생 상세보기 - 상세보기, 학번으로 학생이 있는지 체크
+	public StudentVO view(Integer studentId) throws Exception {
+		// 결과받을 변수 선언
+		StudentVO vo = null;
+		
+		try {
+			// 1. 드라이버확인
+			// 2. DB연결
+			con = DB.getConnenction();
+			if (con != null) System.out.println("DB연결완료 ---");
+			// 3. SQL 작성 - VIEW (클래스 하단)
+			System.out.println(VIEW);
+			// 4. 실행객체에 SQL + 데이터세팅
+			pstmt = con.prepareStatement(VIEW);
+			pstmt.setInt(1, studentId);
+			// 5. 실행, 결과 리턴
+			rs = pstmt.executeQuery();
+			// 6. 결과 담기
+			if (rs != null & rs.next()) {
+				vo = new StudentVO();
+				vo.setStudentId(rs.getInt("studentId"));
+				vo.setDepartment(rs.getString("department"));
+				vo.setStudentName(rs.getString("studentName"));
+				vo.setTotalScore(rs.getInt("totalScore"));
+				vo.setAvrScore(rs.getDouble("avrScore"));
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB 닫기
+			DB.close(con, pstmt, rs);
+		}
+		
+		// 결과 리턴
+		return vo;
+	}
 	
 	// 3. 학생 정보 등록 - insert
 	public Integer write(StudentVO vo) throws Exception {
@@ -88,6 +126,9 @@ public class StudentDAO extends DAO {
 	private static final String LIST = ""
 			+ "select studentId, department, studentName "
 			+ " from student order by studentName";// 학생이름 가나다순 정렬
+	private static final String VIEW = ""
+			+ "select studentId, department, studentName, totalScore, "
+			+ " avrScore from student where studentID = ?";
 	private static final String WRITE = ""
 			+ "insert into student (department, studentName) "
 			+ " values (?, ?)";
