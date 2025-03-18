@@ -120,6 +120,37 @@ public class SubjectDAO extends DAO {
 		return result;
 	}
 	
+	// 6. subjectId check
+	public Integer checkSubjectId(Integer subjectId) throws Exception {
+		// 결과 저장 변수
+		Integer result = null;
+		
+		try {
+			// 1. 드라이버확인
+			// 2. DB연결
+			con = DB.getConnenction();
+			// 3. SQL 작성 - 상수 CHECKSUBJECTID
+			// 4. 실행객체 - SQL + 데이터 세팅
+			pstmt = con.prepareStatement(CHECKSUBJECTID);
+			pstmt.setInt(1, subjectId);
+			// 5. 실행 및 결과 리턴
+			rs = pstmt.executeQuery();
+			if (rs != null && rs.next()) {
+				result = rs.getInt("subjectId");
+			}
+			// 6. 결과확인은 return 후에 처리
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB닫기
+			DB.close(con, pstmt, rs);
+		}
+		
+		// 결과 리턴
+		return result;
+	}
+	
 	
 	// SQL문
 	private static final String LIST = ""
@@ -127,6 +158,10 @@ public class SubjectDAO extends DAO {
 	private static final String WRITE = ""
 			+ "insert into subject (subjectName) values (?)";
 	// ? 은 사용자로 부터 입력받는 데이터 입니다.
+	private static final String CHECKSUBJECTID = ""
+			+ "select subjectId from subject where subjectId = ?";
+	// => subjectId에 맞는 id가 DB에 존재하면 subjectId를 리턴하고
+	// 없으면 null 값을 리턴합니다. (리턴받는자료형 ResultSet)
 }
 
 

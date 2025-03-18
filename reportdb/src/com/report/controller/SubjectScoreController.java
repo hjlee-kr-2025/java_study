@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.report.service.StudentListService;
 import com.report.service.StudentViewService;
+import com.report.service.SubjectCheckSubjectIdService;
 import com.report.service.SubjectListService;
 import com.report.service.SubjectScoreListService;
 import com.report.service.SubjectScoreWriteService;
@@ -54,6 +55,9 @@ public class SubjectScoreController {
 					break;
 				case "3":// 성적입력 (과목별)
 					// 과목 리스트
+					subjectId = getSubjectId();
+					// SubjectScore 테이블에 등록된 목록의 점수를 입력합니다.
+					// 리스트 - subjectScoreId, studentId, studentName, score
 					break;
 				case "0":
 					return;
@@ -154,18 +158,34 @@ public class SubjectScoreController {
 	} // end of selectSubjectId(Integer studentId)
 	
 	private Integer getSubjectId() {
-		// 결과 저장 변수 선언
-		Integer subjectId = null;
-		
-		try {
-			// 과목리스트 
+		while (true) {
+			// 결과 저장 변수 선언
+			Integer subjectId = null;
+			// 과목리스트 저장변수
+			Object result = null;
 			
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		// 결과 리턴
-		return subjectId;
-	}
+			try {
+				System.out.println("----- 과목 선택 -----");
+				// 과목리스트 (SubjectListService 를 통해서 실행합니다)
+				result = Execute.execute(new SubjectListService(), null);
+				// 과목리스트 화면에 출력
+				new SubjectPrint().print((List<SubjectVO>)result);
+				// 과목id를 입력받습니다.
+				subjectId = In.getInt("과목ID");
+				// 존재하는 과목id인지 확인
+				result = Execute.execute(new SubjectCheckSubjectIdService(), subjectId);
+				if (result == null) {
+					System.out.println("존재하지 않는 과목코드입니다.");
+					System.out.println("확인하시고 다시 입력해 주세요");
+					continue;// while (true) 처음으로 돌아가는 명령문
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			
+			// 결과 리턴
+			return subjectId;
+		} // end of while (true)
+	} // end of getSubjectId()
 }

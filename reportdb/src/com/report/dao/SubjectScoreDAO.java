@@ -46,6 +46,28 @@ public class SubjectScoreDAO extends DAO {
 		
 		return list;
 	} // end of list(Integer studentId)
+	
+	// 1-2. subjectId로 리스트 만들기
+	public List<SubjectScoreVO> listSubjectId(Integer subjectId) throws Exception {
+		// 결과 담을 변수
+		List<SubjectScoreVO> list = null;
+		
+		try {
+			// 1. 드라이버확인
+			// 2. DB연결
+			con = DB.getConnenction();
+			// 3. SQL작성 - 상수 - LISTSUBJECTID
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			
+		}
+		
+		// 결과 리턴
+		return list;
+	} // end of listSubjectId(Integer subjectId)
 
 	// 3. 수강신청 - insert - executeUpdate() 메서드로 쿼리실행
 	public Integer write(SubjectScoreVO vo) throws Exception {
