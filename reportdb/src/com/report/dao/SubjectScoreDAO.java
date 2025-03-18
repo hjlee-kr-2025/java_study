@@ -57,12 +57,32 @@ public class SubjectScoreDAO extends DAO {
 			// 2. DB연결
 			con = DB.getConnenction();
 			// 3. SQL작성 - 상수 - LISTSUBJECTID
+			System.out.println(LISTSUBJECTID);
+			// 4. 실행객체 - SQL + 데이터 세팅
+			pstmt = con.prepareStatement(LISTSUBJECTID);
+			// 5. 실행 and 결과 리턴
+			rs = pstmt.executeQuery();
+			// 6. 결과 담기
+			if (rs != null) {
+				while(rs.next()) {
+					if (list == null) list = new ArrayList<SubjectScoreVO>();
+					
+					SubjectScoreVO vo = new SubjectScoreVO();
+					vo.setScoreId(rs.getInt("scoreId"));
+					vo.setStudentId(rs.getInt("studentId"));
+					vo.setStudentName(rs.getString("studentName"));
+					vo.setScore(rs.getInt("score"));
+					
+					list.add(vo);
+				}
+			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
-			
+			// 7. DB닫기
+			DB.close(con, pstmt, rs);
 		}
 		
 		// 결과 리턴
@@ -103,6 +123,14 @@ public class SubjectScoreDAO extends DAO {
 		return result;
 	} // end of write(SubjectScoreVO vo)
 	
+	// 4. 점수 등록
+	public Integer updateScore(SubjectScoreVO vo) throws Exception {
+		// 결과 받을 변수 선언
+		Integer result = null;
+		
+		// 결과 리턴
+		return result;
+	}
 	
 	// SQL
 	private static final String LIST = ""
@@ -110,6 +138,12 @@ public class SubjectScoreDAO extends DAO {
 			+ " from subject as sj, subjectScore as ss "
 			+ " where studentId = ? "// 일반조건
 			+ " and sj.subjectId = ss.subjectId "; // 조인조건 (테이블 2개이상에서 데이터를 가져올때)
+	private static final String LISTSUBJECTID = ""
+			+ "select scoreId, studentId, studentName, score "
+			+ " from subjectScore as ss, student as st "
+			+ " where subjectId = ? "
+			+ " and ss.studentId = st.studentId ";
+	
 	private static final String WRITE = ""
 			+ "insert into subjectScore (studentId, subjectId) "
 			+ " values (?, ?)";

@@ -13,4 +13,5 @@ public class SubjectScoreVO {
 	
 	// join할 데이터 추가
 	private String subjectName;// subject table
+	private String studentName;// student table
 }

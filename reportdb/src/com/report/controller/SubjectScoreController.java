@@ -7,6 +7,7 @@ import com.report.service.StudentViewService;
 import com.report.service.SubjectCheckSubjectIdService;
 import com.report.service.SubjectListService;
 import com.report.service.SubjectScoreListService;
+import com.report.service.SubjectScoreListSubjectIdService;
 import com.report.service.SubjectScoreWriteService;
 import com.report.util.Execute;
 import com.report.util.In;
@@ -56,8 +57,8 @@ public class SubjectScoreController {
 				case "3":// 성적입력 (과목별)
 					// 과목 리스트
 					subjectId = getSubjectId();
-					// SubjectScore 테이블에 등록된 목록의 점수를 입력합니다.
-					// 리스트 - subjectScoreId, studentId, studentName, score
+					// 점수의 반복 입력을 위해 메서드를 호출해서 사용합니다.
+					
 					break;
 				case "0":
 					return;
@@ -188,4 +189,23 @@ public class SubjectScoreController {
 			return subjectId;
 		} // end of while (true)
 	} // end of getSubjectId()
+	
+	// 점수 입력 메서드
+	public void inputScore(Integer subjectId) throws Exception {
+		while (true) {
+			Object result = null;
+			// SubjectScore 테이블에 등록된 목록의 점수를 입력합니다.
+			// 리스트 - subjectScoreId, studentId, studentName, score
+			result = Execute.execute(new SubjectScoreListSubjectIdService(), subjectId);
+			// 리스트 출력
+			new SubjectScorePrint().printSubjectId((List<SubjectScoreVO>)result);
+			
+			Integer scoreId = In.getInt("신청ID");
+			Integer score = In.getInt("점수");
+			
+			// 점수 등록 서비스 (update)
+			
+		}
+	}
+	
 }
