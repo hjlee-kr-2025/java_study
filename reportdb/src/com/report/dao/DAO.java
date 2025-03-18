@@ -11,7 +11,7 @@ public class DAO {
 	public Connection con;
 	// 실행 객체 - DB의 sql문을 실행해서 결과를 리턴합니다.
 	public PreparedStatement pstmt;
-	// 데이터 저장 객체
+	// 데이터 저장 객체 - select
 	public ResultSet rs;
 }
 

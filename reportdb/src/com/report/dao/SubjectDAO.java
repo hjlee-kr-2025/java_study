@@ -20,7 +20,7 @@ public class SubjectDAO extends DAO {
 	 * 2. DB연결 - DB클래스 (URL, ID, PW)
 	 * 3. SQL문작성 - 문자열, 넘길데이터 ?로 표시합니다.
 	 * 4. 실행객체에 데이터(SQL+넘길데이터) 세팅 - ?는 1번부터 순서대로 세팅
-	 * 5. 실행 + 결과받기
+	 * 5. 실행 + 결과받기 (ReseltSet or Integer)
 	 * 6. 결과 처리
 	 * 7. DB닫기 - DB클래스를 호출하여 처리
 	 * 
