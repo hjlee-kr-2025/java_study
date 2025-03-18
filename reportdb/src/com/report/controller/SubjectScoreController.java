@@ -5,11 +5,13 @@ import java.util.List;
 import com.report.service.StudentListService;
 import com.report.service.StudentViewService;
 import com.report.service.SubjectListService;
+import com.report.service.SubjectScoreListService;
 import com.report.service.SubjectScoreWriteService;
 import com.report.util.Execute;
 import com.report.util.In;
 import com.report.util.StudentPrint;
 import com.report.util.SubjectPrint;
+import com.report.util.SubjectScorePrint;
 import com.report.vo.StudentVO;
 import com.report.vo.SubjectScoreVO;
 import com.report.vo.SubjectVO;
@@ -21,17 +23,37 @@ public class SubjectScoreController {
 			System.out.println();
 			System.out.println("<<< ---- 수강신청 및 성적입력 ---- >>>");
 			System.out.println("1. 수강신청");
+			System.out.println("2. 수강신청확인");
+			System.out.println("3. 성적입력");
 			System.out.println("0. 이전메뉴");
 			
 			// 메뉴입력
 			String menu = In.getStr("메뉴");
 			// 결과저장변수
 			Object result = null;
+			// 학생번호변수
+			Integer studentId = null;
+			// 과목번호변수
+			Integer subjectId = null;
 			
 			try {
 				switch (menu) {
 				case "1":
-					selectStudentId();
+					// 수강학생선택
+					studentId = selectStudentId();
+					// 수강신청과목
+					selectSubjectId(studentId);
+					break;
+				case "2":
+					// 수강신청확인 학생선택
+					studentId = selectStudentId();
+					// 수강신청 리스트 서비스 실행
+					result = Execute.execute(new SubjectScoreListService(), studentId);
+					// 결과 확인
+					new SubjectScorePrint().print((List<SubjectScoreVO>)result);
+					break;
+				case "3":// 성적입력 (과목별)
+					// 과목 리스트
 					break;
 				case "0":
 					return;
@@ -47,11 +69,14 @@ public class SubjectScoreController {
 		} // end of while (true)
 	} // end of execute()
 	
-	private void selectStudentId() {
+	// selectStudentID() 메서드는 수강신청학생을 선택해서
+	// 학생id를 리턴받는 메서드로 만들어 줍니다.
+	private Integer selectStudentId() {
+		// 입력된 학생번호로 학생이 있는지 확인하는 변수
 		Object result = null;
 		while (true) {
 			try {
-				System.out.println("--- 수강신청 학생선택 ---");
+				System.out.println("--- 학생선택 ---");
 				// 서비스 실행
 				result = Execute.execute(new StudentListService(), null);
 				// 결과 출력
@@ -63,9 +88,8 @@ public class SubjectScoreController {
 					System.out.println("등록되지않은 학생번호 입니다.");
 					continue;// while문의 처음으로 돌아갑니다.
 				}
-				// 수강신청과목
-				selectSubjectId(studentId);
-				return;// 메서드 종료
+				
+				return studentId;// 메서드 종료
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
@@ -127,5 +151,21 @@ public class SubjectScoreController {
 				e.printStackTrace();
 			}
 		}
+	} // end of selectSubjectId(Integer studentId)
+	
+	private Integer getSubjectId() {
+		// 결과 저장 변수 선언
+		Integer subjectId = null;
+		
+		try {
+			// 과목리스트 
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		// 결과 리턴
+		return subjectId;
 	}
 }

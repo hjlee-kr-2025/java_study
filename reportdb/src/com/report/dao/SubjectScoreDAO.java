@@ -1,5 +1,6 @@
 package com.report.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.report.util.DB;
@@ -20,14 +21,27 @@ public class SubjectScoreDAO extends DAO {
 			// 2. DB 연결
 			con = DB.getConnenction();// URL, ID, PW
 			// 3. SQL 작성 - 하단 - LIST 상수
-			
-			
-			
+			// 4. 실행객체(pstmt) - SQL + 데이터 세팅
+			pstmt = con.prepareStatement(LIST);
+			pstmt.setInt(1, studentId);// LIST 쿼리문의 첫번째 ?
+			// 5. 실행 + 결과리턴
+			rs = pstmt.executeQuery();
+			// 6. 결과 담기 및 확인
+			if (rs != null) {
+				while (rs.next()) {
+					if (list == null) list = new ArrayList<SubjectScoreVO>();
+					SubjectScoreVO vo = new SubjectScoreVO();
+					vo.setSubjectId(rs.getInt("subjectId"));
+					vo.setSubjectName(rs.getString("subjectName"));
+					list.add(vo);
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		} finally {
-			
+			//7. DB닫기
+			DB.close(con, pstmt, rs);
 		}
 		
 		return list;
