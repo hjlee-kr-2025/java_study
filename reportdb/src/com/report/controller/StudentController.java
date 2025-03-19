@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.report.service.StudentDeleteService;
 import com.report.service.StudentListService;
+import com.report.service.StudentUpdateService;
 import com.report.service.StudentViewService;
 import com.report.service.StudentWriteService;
 import com.report.service.SubjectScoreListService;
@@ -126,8 +127,40 @@ public class StudentController {
 	
 	// 수정을 위한 메서드
 	private void update(StudentVO vo) throws Exception {
-		
-	}
+		while(true) {
+			System.out.println("이름 : " + vo.getStudentName());
+			System.out.println("학과 : " + vo.getDepartment());
+			System.out.println("---- 수정 메뉴 ----");
+			System.out.println("1.이름, 2.학과, 9.취소, 0.완료");
+			
+			String menu = In.getStr("메뉴선택");
+			// 결과저장을 위한 변수
+			Integer result = null;
+			
+			switch (menu) {
+			case "1":
+				vo.setStudentName(In.getStr("이름"));
+				break;
+			case "2":
+				vo.setDepartment(In.getStr("학과"));
+				break;
+			case "9":
+				System.out.println("수정이 취소되었습니다.");
+				return;
+			case "0":
+				// 서비스를 실행합니다.
+				result = (Integer) Execute.execute(new StudentUpdateService(), vo);
+				// 결과 확인
+				if (result != null && result != 0) {
+					System.out.println("학생정보가 수정되었습니다.");
+				}
+				return;
+			default:
+				System.out.println("메뉴를 잘못 입력하셨습니다.");
+				System.out.println("[0-2, 9] 번을 입력하세요.");
+			}
+		} // end of while(true)
+	} // end of update(StudentVO vo)
 	
 	
 }
