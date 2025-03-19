@@ -2,6 +2,7 @@ package com.report.controller;
 
 import java.util.List;
 
+import com.report.service.StudentDeleteService;
 import com.report.service.StudentListService;
 import com.report.service.StudentViewService;
 import com.report.service.StudentWriteService;
@@ -19,7 +20,8 @@ public class StudentController {
 			System.out.println();
 			System.out.println("<<< ---- 학생 정보 ---- >>>");
 			System.out.println("1. 학생 리스트, 2. 학생 세부 정보");
-			System.out.println("3. 학생 등록 ");
+			System.out.println("3. 학생 등록, 4. 학생 정보 수정");
+			System.out.println("5. 학생 정보 삭제 ");
 			System.out.println("0. 이전메뉴");
 			
 			// 메뉴입력
@@ -80,11 +82,36 @@ public class StudentController {
 					}
 					
 					break;
+				case "4":
+					System.out.println("4. 학생정보수정");
+					// 1. 누구를 수정할 것인가?
+					// 2. 현재 어떻게 데이터가 저장되어있나?
+					// 3. 어떤데이터를 수정할 것인가?
+					// 4. 수정
+					// 5. 완료
+					studentId = In.getInt("학생Id");
+					// 학생id에 대한 학생정보
+					vo = new StudentVO();
+					vo = (StudentVO) Execute.execute(new StudentViewService(), studentId);
+					// 수정하는 메서드 - 매개변수 vo
+					
+					break;
+				case "5":
+					System.out.println("5. 학생정보삭제");
+					// 넘어가는 데이터 수집 (studentId)
+					studentId = In.getInt("학생Id");
+					// 서비스 실행
+					result = Execute.execute(new StudentDeleteService(), studentId);
+					// 결과 확인
+					if (result != null && (Integer)result != 0) {
+						System.out.println("학생정보가 삭제되었습니다.");
+					}
+					break;
 				case "0":// 이전메뉴
 					return;// 메서드 종료
 				default:
 					System.out.println("잘못 선택 하셨습니다.");
-					System.out.println("1,3,0 번 중 하나를 입력하세요.");
+					System.out.println("[0-5] 번 중 하나를 입력하세요.");
 				}
 				
 			} catch (Exception e) {
@@ -96,4 +123,11 @@ public class StudentController {
 			
 		} // end of while (true)
 	} // end of execute()
+	
+	// 수정을 위한 메서드
+	private void update(StudentVO vo) throws Exception {
+		
+	}
+	
+	
 }

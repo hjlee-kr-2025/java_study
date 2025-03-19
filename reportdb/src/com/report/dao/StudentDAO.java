@@ -121,6 +121,69 @@ public class StudentDAO extends DAO {
 		return result;
 	} // end of write(StudentVO vo)
 	
+	// 4. 학생 정보 수정 - update
+	// studentName, department
+	public Integer update(StudentVO vo) throws Exception {
+		// 결과 저장 변수 선언
+		Integer result = null;
+		
+		try {
+			// 1. 드라이버 확인
+			// 2. DB 연결
+			con = DB.getConnenction();
+			// 3. SQL 작성 - UPDATE - 클래스 하단에 상수 선언
+			System.out.println(UPDATE);// 쿼리확인용
+			// 4. 실행객체에 SQL, 데이터 세팅 (? : 3개)
+			pstmt = con.prepareStatement(UPDATE);
+			pstmt.setString(1, vo.getStudentName());
+			pstmt.setString(2, vo.getDepartment());
+			pstmt.setInt(3, vo.getStudentId());
+			// 5. 실행 및 결과 리턴
+			result = pstmt.executeUpdate();
+			// 6. 결과 확인 - 리턴후 controller에 check
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB 닫기
+			DB.close(con, pstmt);
+		}
+		
+		// 결과 리턴
+		return result;
+	}
+	
+	// 5. 학생 정보 삭제 - delete 명령문
+	public Integer delete(Integer studentId) throws Exception {
+		// 결과 저장 변수 선언 
+		Integer result = null;
+		
+		try {
+			// 1. 드라이버확인 - DB 클래스 static 메서드에서 체크합니다.
+			// 2. DB 연결
+			con = DB.getConnenction();
+			// 3. SQL 작성 - DELETE - 클래스 하단 상수
+			System.out.println(DELETE);
+			// 4. 실행객체에 SQL, 데이터 세팅 (? : 1개)
+			pstmt = con.prepareStatement(DELETE);
+			pstmt.setInt(1, studentId);
+			// 5. 실행 및 결과 리턴
+			result = pstmt.executeUpdate();
+			// 6. 결과 확인 - 리턴후 (controller에서 처리)
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB 닫기
+			DB.close(con, pstmt);
+		}
+		
+		// 결과 리턴 - 자료형이 메서드의 리턴자료형과 동일한 변수 또는 값.
+		return result;
+	}
+	
 	private static final String LIST = ""
 			+ "select studentId, department, studentName "
 			+ " from student order by studentName";// 학생이름 가나다순 정렬
@@ -130,6 +193,13 @@ public class StudentDAO extends DAO {
 	private static final String WRITE = ""
 			+ "insert into student (department, studentName) "
 			+ " values (?, ?)";
+	private static final String UPDATE = ""
+			+ "update student "
+			+ " set studentName = ?, department = ? "
+			+ " where studentId = ?";
+	
+	private static final String DELETE = ""
+			+ "delete from student where studentId = ?";
 }
 
 
