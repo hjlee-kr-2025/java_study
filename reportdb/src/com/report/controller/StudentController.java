@@ -95,7 +95,7 @@ public class StudentController {
 					vo = new StudentVO();
 					vo = (StudentVO) Execute.execute(new StudentViewService(), studentId);
 					// 수정하는 메서드 - 매개변수 vo
-					
+					update(vo);
 					break;
 				case "5":
 					System.out.println("5. 학생정보삭제");
