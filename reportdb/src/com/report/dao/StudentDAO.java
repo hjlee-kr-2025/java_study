@@ -75,8 +75,6 @@ public class StudentDAO extends DAO {
 				vo.setStudentId(rs.getInt("studentId"));
 				vo.setDepartment(rs.getString("department"));
 				vo.setStudentName(rs.getString("studentName"));
-				vo.setTotalScore(rs.getInt("totalScore"));
-				vo.setAvrScore(rs.getDouble("avrScore"));
 			}
 			
 		} catch (Exception e) {
@@ -127,8 +125,8 @@ public class StudentDAO extends DAO {
 			+ "select studentId, department, studentName "
 			+ " from student order by studentName";// 학생이름 가나다순 정렬
 	private static final String VIEW = ""
-			+ "select studentId, department, studentName, totalScore, "
-			+ " avrScore from student where studentId = ?";
+			+ "select studentId, department, studentName "
+			+ " from student where studentId = ?";
 	private static final String WRITE = ""
 			+ "insert into student (department, studentName) "
 			+ " values (?, ?)";
