@@ -1,6 +1,7 @@
 package com.report.service;
 
 import com.report.dao.StudentDAO;
+import com.report.dao.SubjectScoreDAO;
 
 public class StudentDeleteService implements Service {
 
@@ -9,6 +10,9 @@ public class StudentDeleteService implements Service {
 	@Override
 	public Object service(Object obj) throws Exception {
 		// TODO Auto-generated method stub
+		// studentId를 FK 로 사용한 데이터를 전부 삭제합니다.
+		new SubjectScoreDAO().deleteStudentId((Integer)obj);
+		
 		return new StudentDAO().delete((Integer)obj);
 	}
 

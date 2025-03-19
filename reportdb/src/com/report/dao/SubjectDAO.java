@@ -120,6 +120,36 @@ public class SubjectDAO extends DAO {
 		return result;
 	}
 	
+	// 4. 과목명 수정 - subjectId, 수정된 subjectName
+	public Integer update(SubjectVO vo) throws Exception {
+		// 결과 담을 변수 선언
+		Integer result = null;
+		
+		try {
+			// 1. 드라이버 확인
+			// 2. DB연결
+			con = DB.getConnenction();
+			// 3. SQL 작성 - UPDATE - 클래스하단 상수로 선언
+			System.out.println(UPDATE);
+			// 4. 실행객체(pstmt)에 SQL을 담고 데이터세팅 (?: 2개)
+			pstmt = con.prepareStatement(UPDATE);
+			pstmt.setString(1, vo.getSubjectName());
+			pstmt.setInt(2, vo.getSubjectId());
+			// 5. 실행 및 결과 리턴
+			result = pstmt.executeUpdate();
+			// 6. 결과 확인 - 리턴후 처리
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB닫기
+			DB.close(con, pstmt);
+		}
+		
+		// 결과 리턴
+		return result;
+	} // end of update(SubjectVO vo)
+	
 	// 6. subjectId check
 	public Integer checkSubjectId(Integer subjectId) throws Exception {
 		// 결과 저장 변수
@@ -158,6 +188,10 @@ public class SubjectDAO extends DAO {
 	private static final String WRITE = ""
 			+ "insert into subject (subjectName) values (?)";
 	// ? 은 사용자로 부터 입력받는 데이터 입니다.
+	private static final String UPDATE = ""
+			+ "update subject set subjectName = ? "
+			+ " where subjectId = ?";
+	
 	private static final String CHECKSUBJECTID = ""
 			+ "select subjectId from subject where subjectId = ?";
 	// => subjectId에 맞는 id가 DB에 존재하면 subjectId를 리턴하고
