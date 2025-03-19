@@ -58,8 +58,9 @@ public class SubjectScoreDAO extends DAO {
 			con = DB.getConnenction();
 			// 3. SQL작성 - 상수 - LISTSUBJECTID
 			System.out.println(LISTSUBJECTID);
-			// 4. 실행객체 - SQL + 데이터 세팅
+			// 4. 실행객체 - SQL + 데이터 세팅 (?: 1개)
 			pstmt = con.prepareStatement(LISTSUBJECTID);
+			pstmt.setInt(1, subjectId);
 			// 5. 실행 and 결과 리턴
 			rs = pstmt.executeQuery();
 			// 6. 결과 담기
