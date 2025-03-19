@@ -190,6 +190,35 @@ public class SubjectScoreDAO extends DAO {
 		return result;
 	}
 	
+	// subjectId 와 관계된 데이터 삭제
+	public Integer deleteSubjectId(Integer subjectId) throws Exception {
+		// 결과 담을 변수를 선언
+		Integer result = null;
+		
+		try {
+			// 1. 드라이버확인
+			// 2. DB연결
+			con = DB.getConnenction();
+			// 3. SQL 작성 - DELETESUBJECTID - 클래스 하단 상수로 선언
+			System.out.println(DELETESUBJECTID);
+			// 4. 실행객체에 SQL을 담아 데이터를 세팅 (?: 1개)
+			pstmt = con.prepareStatement(DELETESUBJECTID);
+			pstmt.setInt(1, subjectId);
+			// 5. 실행 및 결과리턴
+			result = pstmt.executeUpdate();
+			// 6. 결과확인은 return이후 처리
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB닫기
+			DB.close(con, pstmt);
+		}
+		
+		// 결과 리턴
+		return result;
+	}
+	
 	// SQL
 	private static final String LIST = ""
 			+ "select ss.subjectId, sj.subjectName, ss.score "
@@ -214,6 +243,9 @@ public class SubjectScoreDAO extends DAO {
 			+ "delete from subjectScore where studentId = ?";
 	// => studentId = ? : ?값과 같은 studentId를 가진
 	//    모든데이터(subjectScore테이블안의)를 삭제합니다.
+	
+	private static final String DELETESUBJECTID = ""
+			+ "delete from subjectScore where subjectId = ?";
 }
 
 

@@ -2,7 +2,10 @@ package com.report.controller;
 
 import java.util.List;
 
+import com.report.service.SubjectDeleteService;
 import com.report.service.SubjectListService;
+import com.report.service.SubjectUpdateService;
+import com.report.service.SubjectViewService;
 import com.report.service.SubjectWriteService;
 import com.report.util.Execute;
 import com.report.util.In;
@@ -22,6 +25,7 @@ public class SubjectController {
 			System.out.println();
 			System.out.println("<<< ---- 과목 확인 ---- >>>");
 			System.out.println("1. 과목리스트, 3. 과목 등록 ");
+			System.out.println("4. 과목이름수정, 5. 과목삭제");
 			System.out.println("0. 이전메뉴");
 			
 			// 메뉴입력
@@ -52,11 +56,46 @@ public class SubjectController {
 						System.out.println("과목이 등록되었습니다.");
 					}
 					break;
+				case "4":
+					System.out.println("4. 과목이름수정");
+					// 수정할 데이터 선택
+					Integer subjectId = In.getInt("과목Id");
+					// 데이터 가져오는 서비스 실행
+					SubjectVO vo = new SubjectVO();
+					vo = (SubjectVO)Execute.execute(new SubjectViewService(), subjectId);
+					System.out.println("--------");
+					System.out.println("과목명 : " + vo.getSubjectName());
+					System.out.println("--------");
+					System.out.println("1. 수정, 0. 취소");
+					Integer no = In.getInt("메뉴선택");
+					if (no == 0) {
+						System.out.println("과목이름수정이 취소되었습니다.");
+						break;
+					}
+					vo.setSubjectName(In.getStr("과목이름"));
+					// 수정서비스를 실행
+					result = Execute.execute(new SubjectUpdateService(), vo);
+					if (result != null && (Integer)result != 0) {
+						System.out.println("과목이름이 수정되었습니다.");
+					}
+					break;
+				case "5":
+					System.out.println("5. 과목삭제");
+					// 넘어가는 데이터 세팅(삭제할 데이터)
+					subjectId = In.getInt("과목Id");
+					// 서비스 실행
+					result = Execute.execute(new SubjectDeleteService(), subjectId);
+					// 결과확인
+					if (result != null && (Integer)result != 0) {
+						System.out.println("과목이 삭제되었습니다.");
+					}
+					
+					break;
 				case "0":
 					return ;// SubjectController의 execute() 가 종료
 				default:
 					System.out.println("잘못입력하셨습니다.");
-					System.out.println("1,3,0 중 하나를 입력하세요.");
+					System.out.println("[0-1,3-5] 중 하나를 입력하세요.");
 				}
 			} catch (Exception e) {
 				// TODO: handle exception

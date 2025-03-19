@@ -2,6 +2,7 @@ package com.report.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import com.report.util.DB;
 import com.report.vo.SubjectVO;
@@ -89,6 +90,41 @@ public class SubjectDAO extends DAO {
 		return list;
 	} // end of list()
 	
+	// 2. 과목가져오기 (subjectId로)
+	public SubjectVO view(Integer subjectId) throws Exception {
+		// 결과 저장변수 선언
+		SubjectVO vo = null;
+		
+		try {
+			// 1. 드라이버확인 - 끝
+			// 2. DB연결
+			con = DB.getConnenction();
+			// 3. SQL 작성 - VIEW - 클래스 하단 상수로 선언
+			System.out.println(VIEW);
+			// 4. 실행객체에 SQL 담고 ? 데이터 세팅 (?:1개)
+			pstmt = con.prepareStatement(VIEW);
+			pstmt.setInt(1, subjectId);
+			// 5. 실행 및 결과 리턴
+			rs = pstmt.executeQuery();
+			// 6. 결과 담기
+			if (rs != null && rs.next()) {
+				vo = new SubjectVO();
+				vo.setSubjectId(rs.getInt("subjectId"));
+				vo.setSubjectName(rs.getString("subjectName"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB닫기
+			DB.close(con, pstmt, rs);
+		}
+		
+		
+		// 결과 리턴
+		return vo;
+	}
+	
 	// 3. 과목등록 (insert) 
 	public Integer write(String subjectName) throws Exception {
 		// 결과 저장할 변수 선언
@@ -150,6 +186,35 @@ public class SubjectDAO extends DAO {
 		return result;
 	} // end of update(SubjectVO vo)
 	
+	// 5. 과목삭제
+	public Integer delete(Integer subjectId) throws Exception {
+		// 결과 저장 변수 선언
+		Integer result = null;
+		
+		try {
+			// 1. 드라이버확인
+			// 2. DB연결
+			con = DB.getConnenction();
+			// 3. SQL작성 - DELETE - 클래스 하단 상수선언
+			System.out.println(DELETE);
+			// 4. 실행객체(pstmt)에 SQL을 담고 데이터를 세팅 (?: 1개)
+			pstmt = con.prepareStatement(DELETE);
+			pstmt.setInt(1, subjectId);
+			// 5. 실행 및 결과 리턴
+			result = pstmt.executeUpdate();
+			// 6. 결과확인 - 리턴후 처리
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB닫기
+			DB.close(con, pstmt);
+		}
+		
+		// 결과 리턴
+		return result;
+	}
+	
 	// 6. subjectId check
 	public Integer checkSubjectId(Integer subjectId) throws Exception {
 		// 결과 저장 변수
@@ -185,12 +250,19 @@ public class SubjectDAO extends DAO {
 	// SQL문
 	private static final String LIST = ""
 			+ "select subjectId, subjectName from subject";
+	private static final String VIEW = ""
+			+ "select subjectId, subjectName from subject "
+			+ " where subjectId = ?";
+	
 	private static final String WRITE = ""
 			+ "insert into subject (subjectName) values (?)";
 	// ? 은 사용자로 부터 입력받는 데이터 입니다.
 	private static final String UPDATE = ""
 			+ "update subject set subjectName = ? "
 			+ " where subjectId = ?";
+	
+	private static final String DELETE = ""
+			+ "delete from subject where subjectId = ?";
 	
 	private static final String CHECKSUBJECTID = ""
 			+ "select subjectId from subject where subjectId = ?";
