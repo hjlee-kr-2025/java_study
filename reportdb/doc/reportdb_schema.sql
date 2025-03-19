@@ -23,8 +23,6 @@ CREATE TABLE IF NOT EXISTS `reportdb`.`student` (
   `studentId` INT NOT NULL AUTO_INCREMENT,
   `studentName` VARCHAR(45) NOT NULL,
   `department` VARCHAR(45) NOT NULL,
-  `totalScore` INT NULL DEFAULT 0,
-  `avrScore` DOUBLE NULL DEFAULT 0.0,
   PRIMARY KEY (`studentId`))
 ENGINE = InnoDB;
 

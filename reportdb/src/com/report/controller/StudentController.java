@@ -10,6 +10,7 @@ import com.report.util.Execute;
 import com.report.util.In;
 import com.report.util.StudentPrint;
 import com.report.vo.StudentVO;
+import com.report.vo.SubjectScoreVO;
 
 public class StudentController {
 
@@ -53,6 +54,7 @@ public class StudentController {
 					// 수강한 과목 및 성적 - 넘어가는데이터 studentId
 					result = Execute.execute(new SubjectScoreListService(), studentId);
 					// 화면에 보여준다.
+					new StudentPrint().print(vo, (List<SubjectScoreVO>) result);
 					break;
 				case "3":
 					System.out.println("3. 학생 등록 ---");
