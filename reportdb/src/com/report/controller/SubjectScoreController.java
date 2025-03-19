@@ -8,6 +8,7 @@ import com.report.service.SubjectCheckSubjectIdService;
 import com.report.service.SubjectListService;
 import com.report.service.SubjectScoreListService;
 import com.report.service.SubjectScoreListSubjectIdService;
+import com.report.service.SubjectScoreUpdateScoreService;
 import com.report.service.SubjectScoreWriteService;
 import com.report.util.Execute;
 import com.report.util.In;
@@ -58,13 +59,13 @@ public class SubjectScoreController {
 					// 과목 리스트
 					subjectId = getSubjectId();
 					// 점수의 반복 입력을 위해 메서드를 호출해서 사용합니다.
-					
+					inputScore(subjectId);
 					break;
 				case "0":
 					return;
 				default:
 					System.out.println("잘못 입력하셨습니다.");
-					System.out.println("1,0 중 하나를 입력하세요.");
+					System.out.println("[0-3] 중 하나를 입력하세요.");
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -175,7 +176,7 @@ public class SubjectScoreController {
 				subjectId = In.getInt("과목ID");
 				// 존재하는 과목id인지 확인
 				result = Execute.execute(new SubjectCheckSubjectIdService(), subjectId);
-				if (result == null) {
+				if (result == null || (Integer)result == 0) {
 					System.out.println("존재하지 않는 과목코드입니다.");
 					System.out.println("확인하시고 다시 입력해 주세요");
 					continue;// while (true) 처음으로 돌아가는 명령문
@@ -197,14 +198,27 @@ public class SubjectScoreController {
 			// SubjectScore 테이블에 등록된 목록의 점수를 입력합니다.
 			// 리스트 - subjectScoreId, studentId, studentName, score
 			result = Execute.execute(new SubjectScoreListSubjectIdService(), subjectId);
+			if (result == null) {
+				System.out.println("수강신청 과목이 없습니다.");
+				return;
+			}
 			// 리스트 출력
 			new SubjectScorePrint().printSubjectId((List<SubjectScoreVO>)result);
 			
+			// 신청아이디입력시 0을 입력하면 종료되도록 구현
+			System.out.println("신청ID에 0을 입력하면 성적입력이 종료됩니다.");
 			Integer scoreId = In.getInt("신청ID");
+			if (scoreId == 0) {
+				System.out.println("== 성적입력 종료 ==");
+				return; // inputScore() 메서드 종료
+			}
 			Integer score = In.getInt("점수");
 			
 			// 점수 등록 서비스 (update)
-			
+			SubjectScoreVO vo = new SubjectScoreVO();
+			vo.setScore(score);
+			vo.setScoreId(scoreId);
+			result = Execute.execute(new SubjectScoreUpdateScoreService(), vo);
 		}
 	}
 	

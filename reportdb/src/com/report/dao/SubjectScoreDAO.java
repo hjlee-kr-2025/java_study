@@ -128,6 +128,31 @@ public class SubjectScoreDAO extends DAO {
 		// 결과 받을 변수 선언
 		Integer result = null;
 		
+		try {
+			// 1. 드라이버 확인 - DB클래스 static메서드
+			// - 로딩은 main메서드의 처음부분에 실행 - Class.forName()
+			// 2. DB 연결 - 연결이 되면 Connection 인터페이스로 만든
+			// con 변수가 활성화 - DB클래스에서 DriverManager 클래스를 이용해서 구현
+			con = DB.getConnenction();
+			// 3. SQL작성 - UPDATESCORE - 클래스하단 상수
+			System.out.println(UPDATESCORE);
+			// 4. 실행객체(pstmt) - SQL + 데이터세팅(? 2개)
+			pstmt = con.prepareStatement(UPDATESCORE);
+			pstmt.setInt(1, vo.getScore());
+			pstmt.setInt(2, vo.getScoreId());
+			// 5. 실행 & 결과 리턴
+			result = pstmt.executeUpdate();
+			// 6. 결과 확인 - return 후에 처리
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			// 7. DB닫기
+			DB.close(con, pstmt);
+		}
+		
 		// 결과 리턴
 		return result;
 	}
@@ -139,7 +164,7 @@ public class SubjectScoreDAO extends DAO {
 			+ " where studentId = ? "// 일반조건
 			+ " and sj.subjectId = ss.subjectId "; // 조인조건 (테이블 2개이상에서 데이터를 가져올때)
 	private static final String LISTSUBJECTID = ""
-			+ "select scoreId, studentId, studentName, score "
+			+ "select ss.scoreId, ss.studentId, st.studentName, ss.score "
 			+ " from subjectScore as ss, student as st "
 			+ " where subjectId = ? "
 			+ " and ss.studentId = st.studentId ";
@@ -147,4 +172,16 @@ public class SubjectScoreDAO extends DAO {
 	private static final String WRITE = ""
 			+ "insert into subjectScore (studentId, subjectId) "
 			+ " values (?, ?)";
+	
+	private static final String UPDATESCORE = ""
+			+ "update subjectScore set score = ? "
+			+ " where scoreId = ?";
 }
+
+
+
+
+
+
+
+
