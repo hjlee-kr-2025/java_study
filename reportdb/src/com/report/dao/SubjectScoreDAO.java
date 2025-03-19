@@ -8,7 +8,7 @@ import com.report.vo.SubjectScoreVO;
 
 public class SubjectScoreDAO extends DAO {
 	
-	// 1. 수강신청확인 (학생 id로 리스트 확인)
+	// 1. 수강신청확인 (학생 id로 리스트 확인) + 학생세부정보 수강과목및성적확인
 	public List<SubjectScoreVO> list(Integer studentId) throws Exception {
 		// 결과 저장할 변수 선언 - 리턴type과 동일 자료형으로 선언
 		List<SubjectScoreVO> list = null;
@@ -33,6 +33,7 @@ public class SubjectScoreDAO extends DAO {
 					SubjectScoreVO vo = new SubjectScoreVO();
 					vo.setSubjectId(rs.getInt("subjectId"));
 					vo.setSubjectName(rs.getString("subjectName"));
+					vo.setScore(rs.getInt("score"));
 					list.add(vo);
 				}
 			}
@@ -160,7 +161,7 @@ public class SubjectScoreDAO extends DAO {
 	
 	// SQL
 	private static final String LIST = ""
-			+ "select ss.subjectId, sj.subjectName "
+			+ "select ss.subjectId, sj.subjectName, ss.score "
 			+ " from subject as sj, subjectScore as ss "
 			+ " where studentId = ? "// 일반조건
 			+ " and sj.subjectId = ss.subjectId "; // 조인조건 (테이블 2개이상에서 데이터를 가져올때)

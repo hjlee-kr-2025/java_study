@@ -128,7 +128,7 @@ public class StudentDAO extends DAO {
 			+ " from student order by studentName";// 학생이름 가나다순 정렬
 	private static final String VIEW = ""
 			+ "select studentId, department, studentName, totalScore, "
-			+ " avrScore from student where studentID = ?";
+			+ " avrScore from student where studentId = ?";
 	private static final String WRITE = ""
 			+ "insert into student (department, studentName) "
 			+ " values (?, ?)";
