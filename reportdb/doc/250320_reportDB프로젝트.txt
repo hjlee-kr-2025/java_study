@@ -1,0 +1,62 @@
+Java 프로젝트
+1. reportdb와 데이터베이스 상호작용을 휘한 프로그램
+2. 프로젝트의 기본구조는 백엔트개발에서 사용하는 방식
+- Controller -> Service -> DAO
+
+- DAO에서 하나의 메서드는 하나의 SQL 쿼리가 동작됩니다.
+- 데이터베이스 연동의 7단계 (메서드 하나마다 모두 적용)
+		1. 드라이버확인 (MySQL의 JDBC 드라이버가 프로젝트에 포함되어있는지 check)
+			==> DB 클래스의 static 메서드에 구현
+		2. DB 연결 실행
+			Conection con = DriverManager.getConection(URL, ID, PW);
+			==> DB 클래스를 만들어 접속된 결과를 con에 받아서 사용합니다.
+		3. SQL 작성 - DAO 클래스 하단에 상수로 선언 (private static final String)
+		4. 실행객체(pstmt) 에 SQL을 넣고 쿼리의 ? 데이터를 세팅합니다.
+			pstmt = con.prepareStatement(쿼리); // SQL
+			// 데이터세팅 (쿼리문의 첫번째 물음표가 1번이고, ?개수만큼 세팅해야합니다)
+			pstmt.setString(1, ~~~);
+			pstmt.setInt(2, ~~~);
+			pstmt.setLong(3, ~~~);
+		5. 실행  (rs : ResultSet 자료형, result : Integer 자료형)
+			- select)  rs = pstmt.executeQuery();
+			- insert, update, delete)  result = pstmt.executeUpdate();
+			===> 결과가 리턴됩니다.
+		6. 결과 확인 또는 (JAVA프로그램내의)저장
+			- rs에 들어온 값은 1행 또는 여러행자료에 따라 처리구분
+				if (rs != null && rs.next) {}
+				if (rs != null) {
+					while(rs.next()) {}
+				}
+			- result에 들어온 값은
+				* if (result != null && result != 0) {명령성공!!!}
+				*	if (result == null || result == 0) {명령실패!!!}
+		7. DB 닫기 (DB클래스)
+			- select 명령
+				DB.close(con, pstmt, rs);
+			- insert, update, delete 명령
+				DB.close(con, pstmt);
+
+== Service (Controller 와 DAO 연결하는 통로)
+	- 통로를 하나로 만들기 위해서 Service 인터페이스를 만들고
+		모든 Service클래스가 인터페이스를 상속받아 구현하였습니다.
+	- 다형성
+== Controller (메뉴, 사용자의 입력)
+	- 풀스택에서는 프론트영역과 백엔드영역을 이어주는 역할
+	
+웹프로그래밍(풀스택)에서 가장많이 사용하는 프로그래밍 모델
+MVC (Model-View-Controller)
+- Model : 데이터 처리 Service - DAO
+- View : 화면에 보여지는 영역 - Front(HTML, CSS, JAVASCRIPT)
+- Controller : Controller - view 와 연결
+								- Service, DAO 와 연결
+- Java에서 Controller의 중심이 되는 클래스가 Servlet 클래스입니다.								
+
+
+
+
+
+			
+			
+			
+			
+			
